@@ -1,0 +1,251 @@
+// fonts
+$title-font: "Bricolage Grotesque", sans-serif;
+$text-font: "DM Sans", sans-serif;
+
+// fontsize
+$big-title: 56px;
+$med-title: 40px; 
+$small-title: 24px;
+$text: 16px;
+$small-text: 12px;
+
+// colors
+$bg-body: #0B132B;
+$text-color: #E1E5F2;
+$secondary-color: #5BC0BE;
+
+// spacing
+$tiny-space: 4px;
+$small-space: 8px;
+$space: 16px;
+$big-space: 24px;
+$giga-space: 32px;
+
+// radius
+$small-radius: 10px;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $text-font;
+  color: $text-color;
+  overflow-x: hidden;
+}
+
+main {
+  background-color: $bg-body;
+  max-width: 724px;
+}
+
+button {
+  cursor: pointer;
+}
+
+
+
+// Onboarding écran 1
+
+@mixin info-block($color) {
+  margin-bottom: $space;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: $small-space;
+  padding: $small-space;
+  background-color: rgba($color, 0.25);
+  border-radius: $small-radius;
+  border: 2px solid rgba($color, 0.25);
+
+  &--svg {
+    padding: $small-space;
+    background-color: rgba($color, 0.25);
+    border-radius: $small-radius;
+  }
+
+  &--text {
+    display: flex;
+    flex-direction: column;
+    gap: $tiny-space;
+    color: $text-color;
+
+    p {
+      font-size: $text;
+      font-weight: 600;
+    }
+
+    span {
+      font-size: $small-text;
+      opacity: 0.75;
+    }
+  }
+}
+
+.first {
+  height: 100vh;
+  padding: 0 16px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  &__title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    &--big {
+      color: $secondary-color;
+      font-family: $title-font;
+      font-weight: 800;
+      font-size: $big-title;
+    }
+
+    &--sub {
+      font-size: $text;
+      color: $text-color;
+      font-weight: 600;
+      opacity: 0.75;
+      margin-bottom: $giga-space;
+    }
+  }
+
+  &__data {
+    @include info-block(#5BC0BE);
+    margin-top: $space
+  }
+
+  &__plan {
+    @include info-block(#FFC61A);
+  }
+
+  &__alert {
+    @include info-block(#4A9EFF)
+  }
+
+  &__btn {
+    margin-top: $big-space;
+    padding: $small-space $space;
+    border: none;
+    background-color: $secondary-color;
+    color: $text-color;
+    font-size: $text;
+    font-weight: 600;
+    border-radius: $small-radius;
+  }
+}
+
+
+// Onboarding écran 2,3,4
+
+@mixin screen {
+  padding: 0 $space;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: $bg-body;
+
+  &__img {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+  }
+
+  &__title {
+    font-size: $med-title;
+    line-height: 100%;
+    margin-top: $giga-space * 2;
+
+    span {
+      display: block;
+      color: $secondary-color;
+    }
+  }
+
+  &__text {
+    margin-top: $big-space;
+
+    span {
+      display: block;
+    }
+  }
+
+  &__btn {
+    margin-top: $giga-space * 2;
+    padding: $small-space $space;
+    border: none;
+    background-color: $secondary-color;
+    color: $text-color;
+    font-size: $text;
+    font-weight: 600;
+    border-radius: $small-radius;
+    width: 100%;
+  }
+}
+
+.second {
+  @include screen;
+}
+
+.third {
+  @include screen;
+}
+
+.fourth {
+  @include screen;
+
+  &__btn a {
+    text-decoration: none;
+    color: $text-color;
+  }
+}
+
+.main__onboard {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.onboard__screen {
+  width: 100%;
+  height: 100vh;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+}
+
+.onboard__screen.active {
+  transform: translateX(0);
+}
+
+.onboard__screen.previous {
+  transform: translateX(-100%);
+}
+
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: $bg-body;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__title {
+    font-size: $big-title;
+    color: $secondary-color;
+    font-family: $title-font;
+    font-weight: 800;
+  }
+}
+
