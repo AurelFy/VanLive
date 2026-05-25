@@ -34,11 +34,13 @@ body {
   font-family: $text-font;
   color: $text-color;
   overflow-x: hidden;
+  background-color: $secondary-color;
 }
 
 main {
   background-color: $bg-body;
   max-width: 724px;
+  margin: auto;
 }
 
 button {
@@ -249,3 +251,99 @@ button {
   }
 }
 
+
+// Connexion / login 
+
+.auth {
+  height: 100vh;
+  padding: 80px $space;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: $space;
+
+  &__logo {
+    font-size: $med-title;
+    color: $secondary-color;
+    margin-bottom: 136px;
+  }
+
+  &__input {
+    width: 100%;
+    padding: $small-space $space;
+    border-radius: $space;
+    border: 1px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(91deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 $small-space $big-space -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    font-size: $text;
+    color: $text-color;
+  }
+
+  &__btn {
+    font-size: $text;
+    color: $text-color;
+    background-color: $secondary-color;
+    font-weight: 600;
+    width: 100%;
+    padding: $small-space $space;
+    border: 1px solid rgba(91, 192, 190, 0.30);
+    border-radius: $space;
+  }
+
+  &__switch {
+    color: $secondary-color;
+    font-size: $small-text;
+
+    &--reg, &--log {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  &__sep {
+    height: 2px;
+    width: 50%;
+    background-color: $secondary-color;
+  }
+
+  &__google, &__apple {
+    color: $bg-body;
+    background-color: $text-color;
+    width: 100%;
+    padding: $small-space $space;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: $space;
+    position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.5); // ajuste l'opacité selon ton besoin
+    border-radius: inherit;
+  }
+  }
+
+  &__apple {
+    color: $text-color;
+    background-color: #222;
+  }
+
+  &__title {
+    font-size: $small-title;
+    margin-bottom: 136px;
+  }
+}
+
+.register {
+  gap: $giga-space;
+}
+
+.hidden {
+  display: none;
+}

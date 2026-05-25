@@ -5,26 +5,29 @@ import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 
 
-// // Si start__btn existe : on reste sur onboarding
-// const isOnboardingPage = document.querySelector('.start__btn') !== null;
+// onboarding
 
-// // quand on clique, direction index.html 
-// // action sauvegardée et on ne devra plus le faire les prochaines fois
-// if (isOnboardingPage) {
-//   const startBtn = document.querySelector('.start__btn');
+const isOnboardingPage = document.querySelector('.main__onboard') !== null;
+const isConnexionPage = document.querySelector('.main__con') !== null;
+const isIndexPage = document.querySelector('.main__index') !== null;
 
-//   startBtn.addEventListener('click', () => {
-//     localStorage.setItem('hasSeenOnboarding', 'true');
-//     window.location.href = 'index.html';
-//   });
+if (isOnboardingPage) {
+  const lastBtn = document.querySelector('.fourth__btn');
 
-// } else {
-//   const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
+  lastBtn.addEventListener('click', () => {
+    localStorage.setItem('hasSeenOnboarding', 'true');
+    window.location.href = 'connexion.html';
+  });
 
-//   if (!hasSeenOnboarding) {
-//     window.location.href = 'onboarding.html';
-//   }
-// }
+} else if (!isConnexionPage && !isIndexPage) {
+  const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
+
+  if (!hasSeenOnboarding) {
+    window.location.href = 'onboarding.html';
+  } else {
+    window.location.href = 'connexion.html';
+  }
+}
 
 
 
@@ -35,33 +38,47 @@ const onboardBtn = document.querySelectorAll(".onboard__screen--btn");
 
 let currentScreen = 0;
 
-onboardScreen[currentScreen].classList.add("active");
+function updateScreens(nextIndex) {
+  onboardScreen.forEach((screen, i) => {
+    screen.classList.remove("active", "previous");
+
+    if (i < nextIndex) {
+      screen.classList.add("previous");
+    } else if (i === nextIndex) {
+      screen.classList.add("active");
+    }
+  });
+}
+
+updateScreens(currentScreen);
 
 onboardBtn.forEach((button) => {
   button.addEventListener("click", () => {
-
-    onboardScreen[currentScreen].classList.remove("active");
-
-    currentScreen++;
-
-    if (currentScreen < onboardScreen.length) {
-      onboardScreen[currentScreen].classList.add("active");
+    if (currentScreen < onboardScreen.length - 1) {
+      currentScreen++;
+      updateScreens(currentScreen);
     }
-
   });
 });
 
+// loader page
+
 const loader = document.querySelector(".loader");
-const loaderText = document.querySelector(".loader__title");  
+const loaderText = document.querySelector(".loader__title");
 
-gsap.to(loader, {
-  delay: 3,     
-  duration: 1,   
-  opacity: 0
-});
+if (loader) {
+  gsap.to(loader, {
+    delay: 3,
+    duration: 1,
+    opacity: 0,
+    onComplete: () => {
+      loader.style.display = "none";
+    }
+  });
 
-gsap.to(loaderText, {
-  delay: 2, 
-  duration: 1, 
-  opacity: 0
-})
+  gsap.to(loaderText, {
+    delay: 2,
+    duration: 1,
+    opacity: 0
+  });
+}

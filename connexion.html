@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+
+  <!-- Meta Partage -->
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VanLive — Connexion</title>
+  <meta name="description" content="VanLive">
+  <!-- Open Graph data -->
+  <meta property="og:site_name" content="VanLive — Connexion">
+  <meta property="og:title" content="VanLive — Connexion">
+  <meta property="og:description" content="VanLive Connexion">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://aurelienfeye.be/vanlive/connexion.html">
+  <meta property="og:image" content="">
+  <meta property="og:image:width" content="1800">
+  <meta property="og:image:height" content="945">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&display=swap"
+    rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+    rel="stylesheet">
+
+</head>
+
+<body>
+  <main class="main__con">
+
+
+      <!-- CONNEXION -->
+      <div class="auth login">
+
+        <h1 class="auth__logo">VanLive</h1>
+
+        <input class="auth__input auth__input--login-email" type="email" placeholder="E-mail">
+
+        <input class="auth__input auth__input--login-password" type="password" placeholder="Mot de passe">
+
+        <button class="auth__btn auth__btn--login">
+          Se connecter
+        </button>
+
+        <div class="auth__sep"></div>
+
+        <div class="auth__google">
+          <p>via Google</p>
+        </div>
+
+        <div class="auth__apple">
+          <p>via Apple</p>
+        </div>
+
+        <div class="auth__sep"></div>
+
+        <p class="auth__switch">
+          Pas de compte ?
+          <span class="auth__switch--reg">
+            S'inscrire
+          </span>
+        </p>
+
+      </div>
+
+
+      <!-- INSCRIPTION -->
+      <div class="auth register hidden">
+
+        <h2 class="auth__title">Créer un compte</h2>
+
+        <input class="auth__input auth__input--name" type="text" placeholder="Nom">
+
+        <input class="auth__input auth__input--firstname" type="text" placeholder="Prénom">
+
+        <input class="auth__input auth__input--register-email" type="email" placeholder="E-mail">
+
+        <input class="auth__input auth__input--register-password" type="password" placeholder="Mot de passe">
+
+        <button class="auth__btn auth__btn--register">
+          Créer le compte
+        </button>
+
+        <p class="auth__switch">
+          Déjà un compte ?
+          <span class="auth__switch--log">
+            Se connecter
+          </span>
+        </p>
+
+      </div>
+
+      <p class="auth__message"></p>
+
+  </main>
+  <script type="module" src="/src/scripts/app.js"></script>
+  <script type="module" src="/src/scripts/auth.js"></script>
+</body>
+
+</html>
