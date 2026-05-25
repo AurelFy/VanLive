@@ -9,10 +9,19 @@ $small-title: 24px;
 $text: 16px;
 $small-text: 12px;
 
+//fontweigth 
+$thin: 200; 
+$regular: 400; 
+$semi-bold: 600; 
+$bold: 800; 
+
 // colors
 $bg-body: #0B132B;
 $text-color: #E1E5F2;
 $secondary-color: #5BC0BE;
+$green: #6DFF57;
+$yellow: #FFC61A;
+$blue: #4A9EFF;
 
 // spacing
 $tiny-space: 4px;
@@ -35,12 +44,17 @@ body {
   color: $text-color;
   overflow-x: hidden;
   background-color: $secondary-color;
+  position: relative;
 }
 
 main {
   background-color: $bg-body;
   max-width: 724px;
   margin: auto;
+}
+
+.main__princ {
+  padding: $giga-space $space;
 }
 
 button {
@@ -76,7 +90,7 @@ button {
 
     p {
       font-size: $text;
-      font-weight: 600;
+      font-weight: $semi-bold;
     }
 
     span {
@@ -102,14 +116,14 @@ button {
     &--big {
       color: $secondary-color;
       font-family: $title-font;
-      font-weight: 800;
+      font-weight: $bold;
       font-size: $big-title;
     }
 
     &--sub {
       font-size: $text;
       color: $text-color;
-      font-weight: 600;
+      font-weight: $semi-bold;
       opacity: 0.75;
       margin-bottom: $giga-space;
     }
@@ -135,7 +149,7 @@ button {
     background-color: $secondary-color;
     color: $text-color;
     font-size: $text;
-    font-weight: 600;
+    font-weight: $semi-bold;
     border-radius: $small-radius;
   }
 }
@@ -183,7 +197,7 @@ button {
     background-color: $secondary-color;
     color: $text-color;
     font-size: $text;
-    font-weight: 600;
+    font-weight: $semi-bold;
     border-radius: $small-radius;
     width: 100%;
   }
@@ -242,12 +256,13 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 10000;
 
   &__title {
     font-size: $big-title;
     color: $secondary-color;
     font-family: $title-font;
-    font-weight: 800;
+    font-weight: $bold;
   }
 }
 
@@ -286,7 +301,7 @@ button {
     font-size: $text;
     color: $text-color;
     background-color: $secondary-color;
-    font-weight: 600;
+    font-weight: $semi-bold;
     width: 100%;
     padding: $small-space $space;
     border: 1px solid rgba(91, 192, 190, 0.30);
@@ -316,7 +331,7 @@ button {
     padding: $small-space $space;
     display: flex;
     justify-content: center;
-    font-weight: 600;
+    font-weight: $semi-bold;
     border-radius: $space;
     position: relative;
 
@@ -347,3 +362,190 @@ button {
 .hidden {
   display: none;
 }
+
+
+// Navigation
+
+header {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.menu {
+  padding: $space $small-space;
+  width: 100%;
+  background-color: $text-color;
+
+  &__links {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $giga-space*2;
+
+    &--el {
+      list-style: none;
+    }
+
+    &--active{
+      opacity: 75%;
+    }
+  }
+}
+
+
+// Homepage 
+
+.home__title {
+  font-size: $small-title;
+  font-style: italic;
+  font-weight: $regular;
+  margin-bottom: $big-space;
+
+  &--name {
+    font-weight: $semi-bold;
+    font-style: normal;
+  }
+}
+
+@mixin progress-bar($color, $bg, $value) {
+  width: 100%;
+  height: 8px;
+  background: $bg;
+  border-radius: 100px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: $value;
+    background: $color;
+    left: 0;
+    top: 0;
+    border-radius: 100px;
+  }
+}
+
+@mixin energy-block {
+  display: flex;
+  flex-direction: column;
+  gap: $tiny-space;
+  width: 100%;
+
+  &__info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    font-weight: $semi-bold;
+    color: $text-color;
+    opacity: 0.75;
+  }
+}
+
+
+.energy {
+
+  &__title {
+    font-size: $text;
+    color: $secondary-color;
+    opacity: 0.5;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+
+  &__el {
+    padding: $big-space $space;
+    border-radius: $big-space;
+    border: 1.5px solid rgba(91, 192, 190, 0.3);
+    background: linear-gradient(
+      99deg,
+      rgba(91, 192, 190, 0.15) 0%,
+      rgba(91, 192, 190, 0.05) 100%
+    );
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+
+    &--title {
+      font-size: $small-text;
+      color: $secondary-color;
+      opacity: 0.75;
+      text-transform: uppercase;
+      font-weight: $bold;
+      margin-bottom: $small-space;
+    }
+
+    &--cards {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $space;
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: $space;
+        border-radius: $small-radius;
+        background: rgba(11, 19, 43, 0.5);
+
+        &__numb {
+          font-size: $small-title;
+          font-weight: $bold;
+
+          &--green { color: $green; }
+          &--yellow { color: $yellow; }
+          &--blue { color: $blue; }
+        }
+
+        &__name {
+          font-size: $small-text;
+          font-weight: $bold;
+          color: $secondary-color;
+          opacity: 0.75;
+        }
+      }
+    }
+
+    &--bar {
+      display: flex;
+      flex-direction: column;
+      gap: $space;
+    }
+  }
+}
+
+.bat {
+  @include energy-block;
+
+  &__bar {
+    @include progress-bar(
+      $green,
+      rgba(109, 255, 87, 0.25),
+      67%
+    );
+  }
+}
+
+.cons {
+  @include energy-block;
+
+  &__bar {
+    @include progress-bar(
+      $blue,
+      rgba(74, 158, 255, 0.25),
+      41%
+    );
+  }
+}
+
+// Planification 
+
+// Detail 
+
+// Compte

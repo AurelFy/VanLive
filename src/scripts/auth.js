@@ -3,7 +3,7 @@
 // Firebase : pour la connexion 
 
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 
 // config firebase
 const firebaseConfig = {
@@ -30,6 +30,7 @@ const loginPassword = document.querySelector(".auth__input--login-password");
 
 const registerEmail = document.querySelector(".auth__input--register-email");
 const registerPassword = document.querySelector(".auth__input--register-password");
+const registerFirstname = document.querySelector(".auth__input--firstname");
 
 const loginBtn = document.querySelector(".auth__btn--login");
 const registerBtn = document.querySelector(".auth__btn--register");
@@ -56,20 +57,26 @@ toLogin.addEventListener("click", () => {
 // creation compte
 registerBtn.addEventListener("click", async () => {
   try {
+
     justRegistered = true;
-    await createUserWithEmailAndPassword(
+
+    const userCredential = await createUserWithEmailAndPassword(
       auth,
       registerEmail.value,
       registerPassword.value
     );
 
+    // Sauvegarde du prénom
+    await updateProfile(userCredential.user, {
+      displayName: registerFirstname.value
+    });
+
     await signOut(auth);
 
-    showMessage("Compte créé ✅ Connectez-vous !");
     registerPage.classList.add("hidden");
     loginPage.classList.remove("hidden");
 
-  } catch (error) {
+  } catch(error) {
     justRegistered = false;
     showMessage(error.message);
   }
