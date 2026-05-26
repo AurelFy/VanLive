@@ -22,6 +22,7 @@ $secondary-color: #5BC0BE;
 $green: #6DFF57;
 $yellow: #FFC61A;
 $blue: #4A9EFF;
+$grey: #848484;
 
 // spacing
 $tiny-space: 4px;
@@ -54,13 +55,12 @@ main {
 }
 
 .main__princ {
-  padding: $giga-space $space;
+  padding: $giga-space $space 0 $space;
 }
 
 button {
   cursor: pointer;
 }
-
 
 
 // Onboarding écran 1
@@ -251,7 +251,7 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: $bg-body;
   display: flex;
   justify-content: center;
@@ -339,7 +339,7 @@ button {
     content: "";
     position: absolute;
     inset: 0;
-    background-color: rgba(0, 0, 0, 0.5); // ajuste l'opacité selon ton besoin
+    background-color: rgba(0, 0, 0, 0.5); 
     border-radius: inherit;
   }
   }
@@ -378,6 +378,8 @@ header {
   padding: $space $small-space;
   width: 100%;
   background-color: $text-color;
+  max-width: 724px;
+  margin: auto;
 
   &__links {
     display: flex;
@@ -448,6 +450,7 @@ header {
 
 
 .energy {
+  margin-bottom: $giga-space;
 
   &__title {
     font-size: $text;
@@ -517,6 +520,103 @@ header {
       flex-direction: column;
       gap: $space;
     }
+
+    &--temp {
+      display: flex;
+      gap: $small-space;
+      margin-bottom: $space;
+
+      .data {
+        display: flex;
+        flex-direction: column; 
+        align-items: center;
+        justify-content: center; 
+        gap: $tiny-space; 
+        padding: $small-space;
+
+        &__temp {
+          font-size: $small-title;
+          font-weight: $semi-bold;
+        }
+
+        &__text {
+          color: rgba(91, 192, 190, 0.5);
+          font-weight: $semi-bold;
+        }
+      }
+
+      .sep {
+        width: 2px; 
+        height: 67px; 
+        background-color: $text-color;
+        
+      }
+    }
+
+    &--eq {
+      display: flex; 
+      flex-direction: column; 
+      gap: $space; 
+
+      .eq {
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center;
+
+        &__text {
+          font-size: $text;
+          font-weight: $semi-bold;
+        }
+
+        &__toggle {
+          display: flex;
+
+
+          &--input[type=checkbox] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+          }
+        
+          &--label {
+            //text-indent: -9999px;
+            overflow: hidden;
+            color: transparent;
+            width: 40px;
+            height: 21px;
+            background: grey;
+            display: block;
+            border-radius: 21px;
+            position: relative;
+          }
+        
+          &--label:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 17px;
+            height: 17px;
+            background: #fff;
+            border-radius: 15px;
+            transition: 0.3s;
+          }
+        
+          &--input:checked + label {
+            background: #5ecfbe;
+          }
+        
+          &--input:checked + label:after {
+            left: calc(100% - 2px);
+            transform: translateX(-100%);
+          }
+        
+          &--label:active:after {
+            width: 17px;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -544,7 +644,76 @@ header {
   }
 }
 
+.eauc {
+  @include energy-block;
+
+  &__bar {
+    @include progress-bar(
+      $secondary-color,
+      rgba(91, 192, 190, 0.25),
+      56%
+    );
+  }
+}
+
+.eaug {
+  @include energy-block;
+
+  &__bar {
+    @include progress-bar(
+      $grey,
+      rgba(132, 132, 132, 0.25),
+      34%
+    );
+  }
+}
+
+.hum {
+  @include energy-block;
+
+  &__bar {
+    @include progress-bar(
+      $secondary-color,
+      rgba(132, 132, 132, 0.25),
+      34%
+    );
+  }
+}
+
+.last {
+  margin-bottom: 96px;
+}
+
 // Planification 
+
+.fplan {
+  display: none;
+  height: 100vh;
+
+  &__title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    &--text {
+      font-size: $small-title;
+      font-weight: $semi-bold;
+    }
+  
+    &--btn {
+      font-size: $small-title;
+      background-color: $secondary-color;
+      border-radius: 100px;
+      width: 31px;
+      height: 31px;
+      border: none;
+    }
+  }
+}
+
+splan {
+  
+}
 
 // Detail 
 

@@ -1,11 +1,17 @@
-"use strict"; 
+// 
 
-// Firebase : pour la connexion 
+"use strict";
 
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut,
+  updateProfile
+} from "firebase/auth";
 
-// config firebase
 const firebaseConfig = {
   apiKey: "AIzaSyDrYwhHOXQsnseeUWuN6NGvcC7jTb_J2Bc",
   authDomain: "vanlive-49f90.firebaseapp.com",
@@ -17,8 +23,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-
-// Connexion et creation du compte
 
 const loginPage = document.querySelector(".login");
 const registerPage = document.querySelector(".register");
@@ -54,10 +58,8 @@ toLogin.addEventListener("click", () => {
   loginPage.classList.remove("hidden");
 });
 
-// creation compte
 registerBtn.addEventListener("click", async () => {
   try {
-
     justRegistered = true;
 
     const userCredential = await createUserWithEmailAndPassword(
@@ -66,7 +68,6 @@ registerBtn.addEventListener("click", async () => {
       registerPassword.value
     );
 
-    // Sauvegarde du prénom
     await updateProfile(userCredential.user, {
       displayName: registerFirstname.value
     });
@@ -76,13 +77,14 @@ registerBtn.addEventListener("click", async () => {
     registerPage.classList.add("hidden");
     loginPage.classList.remove("hidden");
 
-  } catch(error) {
+    showMessage("Compte créé avec succès");
+
+  } catch (error) {
     justRegistered = false;
     showMessage(error.message);
   }
 });
 
-// connexion
 loginBtn.addEventListener("click", async () => {
   try {
     await signInWithEmailAndPassword(
@@ -91,21 +93,15 @@ loginBtn.addEventListener("click", async () => {
       loginPassword.value
     );
 
-    showMessage("Connexion réussie");
-    window.location.href = "index.html";
-
   } catch (error) {
     showMessage(error.message);
   }
 });
 
+onAuthStateChanged(auth, (user) => {
+  if (user && !justRegistered && window.location.pathname.includes("connexion.html")) {
+    window.location.href = "index.html";
+  }
 
-// si on est connecté, direct index.html
-
-// session
-// onAuthStateChanged(auth, (user) => {
-//   if (user && !justRegistered) {
-//     window.location.href = "index.html";
-//   }
-//   justRegistered = false;
-// });
+  justRegistered = false;
+});
