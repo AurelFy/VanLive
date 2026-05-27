@@ -8,6 +8,7 @@ $med-title: 40px;
 $small-title: 24px;
 $text: 16px;
 $small-text: 12px;
+$tiny-text: 10px;
 
 //fontweigth 
 $thin: 200; 
@@ -55,7 +56,7 @@ main {
 }
 
 .main__princ {
-  padding: $giga-space $space 0 $space;
+  padding: $giga-space $space;
 }
 
 button {
@@ -157,6 +158,18 @@ button {
 
 // Onboarding écran 2,3,4
 
+@mixin buttons {
+  margin-top: $giga-space * 2;
+  padding: $small-space $space;
+  border: none;
+  background-color: $secondary-color;
+  color: $text-color;
+  font-size: $text;
+  font-weight: $semi-bold;
+  border-radius: $small-radius;
+  width: 100%;
+}
+
 @mixin screen {
   padding: 0 $space;
   display: flex;
@@ -191,15 +204,7 @@ button {
   }
 
   &__btn {
-    margin-top: $giga-space * 2;
-    padding: $small-space $space;
-    border: none;
-    background-color: $secondary-color;
-    color: $text-color;
-    font-size: $text;
-    font-weight: $semi-bold;
-    border-radius: $small-radius;
-    width: 100%;
+    @include buttons; 
   }
 }
 
@@ -448,6 +453,54 @@ header {
   }
 }
 
+@mixin toggle {
+  display: flex;
+
+
+          &--input[type=checkbox] {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+          }
+        
+          &--label {
+            //text-indent: -9999px;
+            overflow: hidden;
+            color: transparent;
+            width: 40px;
+            height: 21px;
+            background: grey;
+            display: block;
+            border-radius: 21px;
+            position: relative;
+          }
+        
+          &--label:after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 17px;
+            height: 17px;
+            background: #fff;
+            border-radius: 15px;
+            transition: 0.3s;
+          }
+        
+          &--input:checked + label {
+            background: #5ecfbe;
+          }
+        
+          &--input:checked + label:after {
+            left: calc(100% - 2px);
+            transform: translateX(-100%);
+          }
+        
+          &--label:active:after {
+            width: 17px;
+          }
+}
+
 
 .energy {
   margin-bottom: $giga-space;
@@ -569,51 +622,7 @@ header {
         }
 
         &__toggle {
-          display: flex;
-
-
-          &--input[type=checkbox] {
-            height: 0;
-            width: 0;
-            visibility: hidden;
-          }
-        
-          &--label {
-            //text-indent: -9999px;
-            overflow: hidden;
-            color: transparent;
-            width: 40px;
-            height: 21px;
-            background: grey;
-            display: block;
-            border-radius: 21px;
-            position: relative;
-          }
-        
-          &--label:after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 17px;
-            height: 17px;
-            background: #fff;
-            border-radius: 15px;
-            transition: 0.3s;
-          }
-        
-          &--input:checked + label {
-            background: #5ecfbe;
-          }
-        
-          &--input:checked + label:after {
-            left: calc(100% - 2px);
-            transform: translateX(-100%);
-          }
-        
-          &--label:active:after {
-            width: 17px;
-          }
+          @include toggle();
         }
       }
     }
@@ -686,8 +695,169 @@ header {
 
 // Planification 
 
+.body__plan {
+  overflow: hidden;
+}
+
+.main__plan {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.plan__screen {
+  width: 100%;
+  height: 100vh;
+  padding: $giga-space $space;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform: translateX(100%);
+  transition: transform 0.5s ease;
+}
+
+.plan__screen.active {
+  transform: translateX(0);
+}
+
+.plan__screen.previous {
+  transform: translateX(-100%);
+}
+
+@mixin plan-title {
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-bottom: $big-space;
+
+    &--text {
+      font-size: $small-title;
+      font-weight: $semi-bold;
+
+    }
+
+    &--btn {
+      position: absolute;
+      left: 0;
+      background-color: rgba(91, 192, 190, 0.1);
+      border: 1px solid rgba(91, 192, 190, 0.75);
+      width: 31px;
+      height: 31px;
+      border-radius: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        transform: translateX(-1px);
+      }
+    }
+}
+
+@mixin plan-progress {
+  width: 100%;
+  height: 3px;
+  background-color: rgba(225, 229, 242, 0.25);
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: $big-space;
+
+  &--pill {
+    width: 30px;
+    height: 10px;
+    border-radius: 100px;
+    background-color: $secondary-color;
+    position: absolute;
+  }
+
+  .pill1 {
+    left: 0;
+  }
+
+  .pill2 {
+     left: 30%;
+  }
+
+  .pill3 {
+    left: 62%;
+  }
+
+  .pill4 {
+    right: 0;
+  }
+
+  &--dot {
+    width: 10px;
+    height: 10px;
+    background-color: #41485D;
+    border-radius: 100px;
+    position: absolute;
+  }
+
+  .dot1 {
+    left: 0;
+  }
+
+  .dot2 {
+    left: 33.3333%;
+  }
+
+  .dot3 {
+    left: 66.6666%;
+  }
+
+  .dot4 {
+    right: 0;
+  }
+}
+
+@mixin plan-sub {
+  color: #5BC0BE;
+  font-size: $small-text;
+  font-weight: $semi-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px; 
+}
+
+@mixin plan-input {
+  display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: $tiny-space;
+    margin-bottom: $big-space;
+
+    &--label {
+      color: rgba(91, 192, 190, 0.75);
+      font-size: $small-text;
+      font-weight: $semi-bold;
+      text-transform: uppercase;
+    }
+
+    &--input {
+      padding: $small-space $space;
+      border-radius: $small-radius;
+      border: 1.5px solid rgba(91, 192, 190, 0.30);
+      background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+      background-blend-mode: hard-light;
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(16px);
+      width: 100%;
+
+      .trav__name, .trav__desc {
+        font-weight: $semi-bold;
+      }
+    }
+}
+
 .fplan {
-  display: none;
   height: 100vh;
 
   &__title {
@@ -711,8 +881,397 @@ header {
   }
 }
 
-splan {
-  
+
+.splan {
+  height: 100vh;
+
+  &__title {
+    @include plan-title;
+  }
+
+  &__progress {
+    @include plan-progress;
+  }
+
+  &__sub {
+    @include plan-sub;
+  }
+
+  &__name, &__date, &__desc {
+    @include plan-input;
+  }
+
+  &__date {
+    &--input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: $space;
+      padding: $big-space $space;
+
+      .date {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        border-radius: $small-radius;
+        background: rgba(11, 19, 43, 0.50);
+        padding: $small-space $space;
+
+        &__text {
+          color: $secondary-color;
+          font-size: $small-text;
+          font-weight: $semi-bold;
+        }
+
+        &__num {
+          font-size: $small-title;
+          font-weight: $semi-bold;
+        }
+      }
+    }
+  }
+
+  &__btn {
+    @include buttons; 
+  }
+}
+
+.tplan {
+  height: 100vh;
+
+  &__title {
+    @include plan-title;
+  }
+
+  &__progress {
+    @include plan-progress;
+  }
+
+  &__sub {
+    @include plan-sub;
+  }
+
+  &__btn {
+    @include buttons; 
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    gap: $small-space;
+
+    &--el {
+      width: calc(50% - 8px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: $tiny-space;
+      border-radius: $small-radius*2;
+      border: 1.5px solid rgba(91, 192, 190, 0.30);
+      background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+      background-blend-mode: hard-light;
+      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(16px);
+      padding: $space;
+
+      .title {
+        font-size: $text;
+        font-weight: $semi-bold;
+        margin-top: $tiny-space;
+      }
+
+      .desc {
+        color: rgba(225, 229, 242, 0.75);
+        font-size: $tiny-text;
+        font-weight: $semi-bold;
+      }
+    }
+
+    .active {
+      border: 1.5px solid #5BC0BE;
+      background: rgba(91, 192, 190, 0.25);
+    }
+  }
+}
+
+.foplan {
+  height: 100vh;
+
+  &__title {
+    @include plan-title;
+  }
+
+  &__progress {
+    @include plan-progress;
+  }
+
+  &__sub {
+    @include plan-sub;
+  }
+
+  &__btn {
+    @include buttons; 
+  }
+
+  &__opt {
+    border-radius: 25px;
+    border: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px);
+    padding: $space $big-space;
+
+    &--el {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $small-space;
+
+      .opt {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+
+        &__title {
+          font-size: $text;
+          font-weight: $bold;
+        }
+
+        &__desc {
+          color: rgba(225, 229, 242, 0.50);
+          font-size: $tiny-text;
+          font-weight: $semi-bold;
+        }
+
+        &__toggle {
+          @include toggle; 
+        }
+      }
+    }
+
+    &--sep {
+      height: 1px;
+      width: 100%;
+      background-color: rgba(225, 229, 242, 0.10);
+      margin-bottom: $small-space;
+    }
+
+    &--text {
+      color: rgba(91, 192, 190, 0.75);
+      font-size: $small-text;
+      font-weight: $bold;
+    }
+  }
+}
+
+.fiplan {
+  height: 100vh;
+
+  &__title {
+    @include plan-title; 
+  }
+
+  &__progress {
+    @include plan-progress; 
+  }
+
+  &__sub {
+    @include plan-sub; 
+  }
+
+  &__btn {
+    @include buttons;
+  }
+
+  &__stage {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: $big-space;
+    border-radius: 25px;
+    border: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px);
+    padding: $space $big-space;
+    margin-bottom: $space;
+
+    &--num {
+      font-size: $small-title;
+      font-weight: $bold;
+      width: 40px;
+      height: 40px;
+      background-color: $secondary-color;
+      border-radius: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    &--infos {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: $tiny-space;
+
+      .title {
+        font-size: $text;
+        font-weight: $bold;
+      }
+
+      .infos {
+        color: rgba(225, 229, 242, 0.75);
+        font-size: $small-text;
+        font-weight: $semi-bold;
+      }
+
+      .pill {
+        font-size: $tiny-text;
+        padding: 2px $tiny-space;
+        border: 1px solid $green;
+        background-color: rgba(109, 255, 87, 0.1);
+          color: $green;
+        border-radius: $small-radius;
+        font-weight: $semi-bold;
+      }
+    }
+  }
+
+  &__addstage {
+    border-radius: 20px;
+    border: 1.5px dashed rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.08) 0%, rgba(91, 192, 190, 0.03) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    padding: $space;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--text, &--plus {
+      color: rgba(225, 229, 242, 0.75);
+      font-size: $text;
+      font-weight: $semi-bold;
+    }
+  }
+}
+
+.siplan {
+  height: 100vh;
+
+  &__title {
+    @include plan-title; 
+  }
+
+  &__progress {
+    height: 10px;
+    width: 100%;
+    background-color: $secondary-color;
+    border-radius: 100px;
+    margin-bottom: $big-space;  
+  }
+
+  &__sub {
+    @include plan-sub; 
+  }
+
+  &__btn, &__btn--br {
+    @include buttons;
+  }
+
+  &__img {
+    border-radius: 25px 25px 0 0;
+    border-right:1px solid rgba(91, 192, 190, 0.25);
+    border-left:1px solid rgba(91, 192, 190, 0.25);
+    border-top:1px solid rgba(91, 192, 190, 0.25);
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 400px;
+      border-radius: 25px 25px 0 0;
+    }
+  }
+
+  &__res {
+    border-radius: 0 0 25px 25px;
+    border-right: 1.5px solid rgba(91, 192, 190, 0.30);
+    border-bottom: 1.5px solid rgba(91, 192, 190, 0.30);
+    border-left: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(15px);
+    padding: $space $big-space;
+    margin-top: -5px;
+
+    &--title {
+      font-size: $text;
+      font-weight: $bold;
+      margin-bottom: $small-space;
+
+      span {
+        display: block;
+        font-weight: $semi-bold;
+        color: rgba(91, 192, 190, 0.75);
+      }
+    }
+
+    &--date {
+      color: rgba(225, 229, 242, 0.75);
+      font-size: $small-text;
+      font-weight: $semi-bold;
+    }
+
+    &--cards {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: $space;
+
+      .card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: $small-space $space;
+        border-radius: $small-radius;
+        background: rgba(11, 19, 43, 0.5);
+        border: 2px solid rgba(91, 192, 190, 0.25);
+
+        &__num {
+          font-size: $small-title;
+          font-weight: $bold;
+          margin-bottom: $small-space;
+        }
+
+        &__desc {
+          font-size: $small-text;
+          font-weight: $bold;
+          color: $secondary-color;
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  &__btn--br {
+    margin-top: $space;
+    border: 2px solid $text-color;
+    background-color: transparent;
+  }
+}
+
+.plan__screen--btn {
+  margin-top: $giga-space;
 }
 
 // Detail 

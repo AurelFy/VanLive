@@ -29,9 +29,11 @@ const onboardBtn = document.querySelectorAll(".onboard__screen--btn");
 const planScreen = document.querySelectorAll(".plan__screen");
 const planBtn = document.querySelectorAll(".plan__screen--btn");
 
-let currentScreen = 0;
+let currentOnboardScreen = 0;
+let currentPlanScreen = 0;
 
-function updateScreens(nextIndex) {
+// MAJ Onboarding
+function updateOnboardScreens(nextIndex) {
   onboardScreen.forEach((screen, i) => {
     screen.classList.remove("active", "previous");
 
@@ -43,13 +45,38 @@ function updateScreens(nextIndex) {
   });
 }
 
-updateScreens(currentScreen);
+// MAJ Planification
+function updatePlanScreens(nextIndex) {
+  planScreen.forEach((screen, i) => {
+    screen.classList.remove("active", "previous");
 
+    if (i < nextIndex) {
+      screen.classList.add("previous");
+    } else if (i === nextIndex) {
+      screen.classList.add("active");
+    }
+  });
+}
+
+updateOnboardScreens(currentOnboardScreen);
+updatePlanScreens(currentPlanScreen);
+
+// Btn Onboard
 onboardBtn.forEach((button) => {
   button.addEventListener("click", () => {
-    if (currentScreen < onboardScreen.length - 1) {
-      currentScreen++;
-      updateScreens(currentScreen);
+    if (currentOnboardScreen < onboardScreen.length - 1) {
+      currentOnboardScreen++;
+      updateOnboardScreens(currentOnboardScreen);
+    }
+  });
+});
+
+// Btn Plan
+planBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (currentPlanScreen < planScreen.length - 1) {
+      currentPlanScreen++;
+      updatePlanScreens(currentPlanScreen);
     }
   });
 });
