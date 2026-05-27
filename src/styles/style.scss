@@ -4,17 +4,17 @@ $text-font: "DM Sans", sans-serif;
 
 // fontsize
 $big-title: 56px;
-$med-title: 40px; 
+$med-title: 40px;
 $small-title: 24px;
 $text: 16px;
 $small-text: 12px;
 $tiny-text: 10px;
 
 //fontweigth 
-$thin: 200; 
-$regular: 400; 
-$semi-bold: 600; 
-$bold: 800; 
+$thin: 200;
+$regular: 400;
+$semi-bold: 600;
+$bold: 800;
 
 // colors
 $bg-body: #0B132B;
@@ -24,6 +24,7 @@ $green: #6DFF57;
 $yellow: #FFC61A;
 $blue: #4A9EFF;
 $grey: #848484;
+$red: #D03737;
 
 // spacing
 $tiny-space: 4px;
@@ -44,9 +45,10 @@ $small-radius: 10px;
 body {
   font-family: $text-font;
   color: $text-color;
-  overflow-x: hidden;
-  background-color: $secondary-color;
+  //overflow-x: hidden;
+  background-color: $bg-body;
   position: relative;
+  max-width: 724px;
 }
 
 main {
@@ -204,7 +206,7 @@ button {
   }
 
   &__btn {
-    @include buttons; 
+    @include buttons;
   }
 }
 
@@ -251,7 +253,8 @@ button {
   transform: translateX(-100%);
 }
 
-.loader {
+.loader,
+.loadfast {
   position: absolute;
   top: 0;
   left: 0;
@@ -317,7 +320,8 @@ button {
     color: $secondary-color;
     font-size: $small-text;
 
-    &--reg, &--log {
+    &--reg,
+    &--log {
       text-decoration: underline;
       cursor: pointer;
     }
@@ -329,7 +333,8 @@ button {
     background-color: $secondary-color;
   }
 
-  &__google, &__apple {
+  &__google,
+  &__apple {
     color: $bg-body;
     background-color: $text-color;
     width: 100%;
@@ -340,13 +345,13 @@ button {
     border-radius: $space;
     position: relative;
 
-  &::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0, 0, 0, 0.5); 
-    border-radius: inherit;
-  }
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: rgba(0, 0, 0, 0.5);
+      border-radius: inherit;
+    }
   }
 
   &__apple {
@@ -376,7 +381,7 @@ header {
   bottom: 0;
   left: 0;
   width: 100%;
-  z-index: 9999;
+  z-index: 99999;
 }
 
 .menu {
@@ -396,7 +401,7 @@ header {
       list-style: none;
     }
 
-    &--active{
+    &--active {
       opacity: 75%;
     }
   }
@@ -457,48 +462,47 @@ header {
   display: flex;
 
 
-          &--input[type=checkbox] {
-            height: 0;
-            width: 0;
-            visibility: hidden;
-          }
-        
-          &--label {
-            //text-indent: -9999px;
-            overflow: hidden;
-            color: transparent;
-            width: 40px;
-            height: 21px;
-            background: grey;
-            display: block;
-            border-radius: 21px;
-            position: relative;
-          }
-        
-          &--label:after {
-            content: '';
-            position: absolute;
-            top: 2px;
-            left: 2px;
-            width: 17px;
-            height: 17px;
-            background: #fff;
-            border-radius: 15px;
-            transition: 0.3s;
-          }
-        
-          &--input:checked + label {
-            background: #5ecfbe;
-          }
-        
-          &--input:checked + label:after {
-            left: calc(100% - 2px);
-            transform: translateX(-100%);
-          }
-        
-          &--label:active:after {
-            width: 17px;
-          }
+  &--input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  &--label {
+    overflow: hidden;
+    color: transparent;
+    width: 40px;
+    height: 21px;
+    background: grey;
+    display: block;
+    border-radius: 21px;
+    position: relative;
+  }
+
+  &--label:after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 17px;
+    height: 17px;
+    background: #fff;
+    border-radius: 15px;
+    transition: 0.3s;
+  }
+
+  &--input:checked+label {
+    background: #5ecfbe;
+  }
+
+  &--input:checked+label:after {
+    left: calc(100% - 2px);
+    transform: translateX(-100%);
+  }
+
+  &--label:active:after {
+    width: 17px;
+  }
 }
 
 
@@ -517,11 +521,9 @@ header {
     padding: $big-space $space;
     border-radius: $big-space;
     border: 1.5px solid rgba(91, 192, 190, 0.3);
-    background: linear-gradient(
-      99deg,
-      rgba(91, 192, 190, 0.15) 0%,
-      rgba(91, 192, 190, 0.05) 100%
-    );
+    background: linear-gradient(99deg,
+        rgba(91, 192, 190, 0.15) 0%,
+        rgba(91, 192, 190, 0.05) 100%);
     background-blend-mode: hard-light;
     box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
     backdrop-filter: blur(15px);
@@ -554,9 +556,17 @@ header {
           font-size: $small-title;
           font-weight: $bold;
 
-          &--green { color: $green; }
-          &--yellow { color: $yellow; }
-          &--blue { color: $blue; }
+          &--green {
+            color: $green;
+          }
+
+          &--yellow {
+            color: $yellow;
+          }
+
+          &--blue {
+            color: $blue;
+          }
         }
 
         &__name {
@@ -581,10 +591,10 @@ header {
 
       .data {
         display: flex;
-        flex-direction: column; 
+        flex-direction: column;
         align-items: center;
-        justify-content: center; 
-        gap: $tiny-space; 
+        justify-content: center;
+        gap: $tiny-space;
         padding: $small-space;
 
         &__temp {
@@ -599,21 +609,21 @@ header {
       }
 
       .sep {
-        width: 2px; 
-        height: 67px; 
+        width: 2px;
+        height: 67px;
         background-color: $text-color;
-        
+
       }
     }
 
     &--eq {
-      display: flex; 
-      flex-direction: column; 
-      gap: $space; 
+      display: flex;
+      flex-direction: column;
+      gap: $space;
 
       .eq {
-        display: flex; 
-        justify-content: space-between; 
+        display: flex;
+        justify-content: space-between;
         align-items: center;
 
         &__text {
@@ -633,11 +643,9 @@ header {
   @include energy-block;
 
   &__bar {
-    @include progress-bar(
-      $green,
+    @include progress-bar($green,
       rgba(109, 255, 87, 0.25),
-      67%
-    );
+      67%);
   }
 }
 
@@ -645,11 +653,9 @@ header {
   @include energy-block;
 
   &__bar {
-    @include progress-bar(
-      $blue,
+    @include progress-bar($blue,
       rgba(74, 158, 255, 0.25),
-      41%
-    );
+      41%);
   }
 }
 
@@ -657,11 +663,9 @@ header {
   @include energy-block;
 
   &__bar {
-    @include progress-bar(
-      $secondary-color,
+    @include progress-bar($secondary-color,
       rgba(91, 192, 190, 0.25),
-      56%
-    );
+      56%);
   }
 }
 
@@ -669,11 +673,9 @@ header {
   @include energy-block;
 
   &__bar {
-    @include progress-bar(
-      $grey,
+    @include progress-bar($grey,
       rgba(132, 132, 132, 0.25),
-      34%
-    );
+      34%);
   }
 }
 
@@ -681,11 +683,9 @@ header {
   @include energy-block;
 
   &__bar {
-    @include progress-bar(
-      $secondary-color,
+    @include progress-bar($secondary-color,
       rgba(132, 132, 132, 0.25),
-      34%
-    );
+      34%);
   }
 }
 
@@ -696,26 +696,31 @@ header {
 // Planification 
 
 .body__plan {
-  overflow: hidden;
+  //overflow-x: hidden;
+  position: relative;
 }
 
 .main__plan {
   position: relative;
-  overflow: hidden;
-  height: 100vh;
+  overflow-x: hidden;
+  // height: 100vh;
+  min-height: 100vh;
+}
+
+.trav__overflow {
+  overflow-y: inherit;
 }
 
 .plan__screen {
   width: 100%;
   height: 100vh;
   padding: $giga-space $space;
-
   position: absolute;
   top: 0;
   left: 0;
-
   transform: translateX(100%);
   transition: transform 0.5s ease;
+  z-index: 1;
 }
 
 .plan__screen.active {
@@ -728,34 +733,34 @@ header {
 
 @mixin plan-title {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: $big-space;
+
+  &--text {
+    font-size: $small-title;
+    font-weight: $semi-bold;
+
+  }
+
+  &--btn {
+    position: absolute;
+    left: 0;
+    background-color: rgba(91, 192, 190, 0.1);
+    border: 1px solid rgba(91, 192, 190, 0.75);
+    width: 31px;
+    height: 31px;
+    border-radius: 100px;
+    display: flex;
     justify-content: center;
     align-items: center;
-    position: relative;
-    width: 100%;
-    margin-bottom: $big-space;
 
-    &--text {
-      font-size: $small-title;
-      font-weight: $semi-bold;
-
+    svg {
+      transform: translateX(-1px);
     }
-
-    &--btn {
-      position: absolute;
-      left: 0;
-      background-color: rgba(91, 192, 190, 0.1);
-      border: 1px solid rgba(91, 192, 190, 0.75);
-      width: 31px;
-      height: 31px;
-      border-radius: 100px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      svg {
-        transform: translateX(-1px);
-      }
-    }
+  }
 }
 
 @mixin plan-progress {
@@ -781,7 +786,7 @@ header {
   }
 
   .pill2 {
-     left: 30%;
+    left: 30%;
   }
 
   .pill3 {
@@ -824,52 +829,54 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 24px; 
+  margin-bottom: 24px;
 }
 
 @mixin plan-input {
   display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: $tiny-space;
-    margin-bottom: $big-space;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $tiny-space;
+  margin-bottom: $big-space;
 
-    &--label {
-      color: rgba(91, 192, 190, 0.75);
-      font-size: $small-text;
+  &--label {
+    color: rgba(91, 192, 190, 0.75);
+    font-size: $small-text;
+    font-weight: $semi-bold;
+    text-transform: uppercase;
+  }
+
+  &--input {
+    padding: $small-space $space;
+    border-radius: $small-radius;
+    border: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px);
+    width: 100%;
+
+    .trav__name,
+    .trav__desc {
       font-weight: $semi-bold;
-      text-transform: uppercase;
     }
-
-    &--input {
-      padding: $small-space $space;
-      border-radius: $small-radius;
-      border: 1.5px solid rgba(91, 192, 190, 0.30);
-      background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
-      background-blend-mode: hard-light;
-      box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
-      backdrop-filter: blur(16px);
-      width: 100%;
-
-      .trav__name, .trav__desc {
-        font-weight: $semi-bold;
-      }
-    }
+  }
 }
 
 .fplan {
   height: 100vh;
+  //display: none;
 
   &__title {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
+
     &--text {
       font-size: $small-title;
       font-weight: $semi-bold;
     }
-  
+
     &--btn {
       font-size: $small-title;
       background-color: $secondary-color;
@@ -877,6 +884,7 @@ header {
       width: 31px;
       height: 31px;
       border: none;
+      margin-top: 0 !important;
     }
   }
 }
@@ -897,7 +905,9 @@ header {
     @include plan-sub;
   }
 
-  &__name, &__date, &__desc {
+  &__name,
+  &__date,
+  &__desc {
     @include plan-input;
   }
 
@@ -933,7 +943,7 @@ header {
   }
 
   &__btn {
-    @include buttons; 
+    @include buttons;
   }
 }
 
@@ -953,7 +963,7 @@ header {
   }
 
   &__btn {
-    @include buttons; 
+    @include buttons;
   }
 
   &__cards {
@@ -1014,7 +1024,7 @@ header {
   }
 
   &__btn {
-    @include buttons; 
+    @include buttons;
   }
 
   &__opt {
@@ -1049,7 +1059,7 @@ header {
         }
 
         &__toggle {
-          @include toggle; 
+          @include toggle;
         }
       }
     }
@@ -1073,15 +1083,15 @@ header {
   height: 100vh;
 
   &__title {
-    @include plan-title; 
+    @include plan-title;
   }
 
   &__progress {
-    @include plan-progress; 
+    @include plan-progress;
   }
 
   &__sub {
-    @include plan-sub; 
+    @include plan-sub;
   }
 
   &__btn {
@@ -1137,7 +1147,7 @@ header {
         padding: 2px $tiny-space;
         border: 1px solid $green;
         background-color: rgba(109, 255, 87, 0.1);
-          color: $green;
+        color: $green;
         border-radius: $small-radius;
         font-weight: $semi-bold;
       }
@@ -1156,7 +1166,8 @@ header {
     justify-content: space-between;
     align-items: center;
 
-    &--text, &--plus {
+    &--text,
+    &--plus {
       color: rgba(225, 229, 242, 0.75);
       font-size: $text;
       font-weight: $semi-bold;
@@ -1168,7 +1179,7 @@ header {
   height: 100vh;
 
   &__title {
-    @include plan-title; 
+    @include plan-title;
   }
 
   &__progress {
@@ -1176,22 +1187,23 @@ header {
     width: 100%;
     background-color: $secondary-color;
     border-radius: 100px;
-    margin-bottom: $big-space;  
+    margin-bottom: $big-space;
   }
 
   &__sub {
-    @include plan-sub; 
+    @include plan-sub;
   }
 
-  &__btn, &__btn--br {
+  &__btn,
+  &__btn--br {
     @include buttons;
   }
 
   &__img {
     border-radius: 25px 25px 0 0;
-    border-right:1px solid rgba(91, 192, 190, 0.25);
-    border-left:1px solid rgba(91, 192, 190, 0.25);
-    border-top:1px solid rgba(91, 192, 190, 0.25);
+    border-right: 1px solid rgba(91, 192, 190, 0.25);
+    border-left: 1px solid rgba(91, 192, 190, 0.25);
+    border-top: 1px solid rgba(91, 192, 190, 0.25);
 
     img {
       width: 100%;
@@ -1274,6 +1286,266 @@ header {
   margin-top: $giga-space;
 }
 
+.seplan {
+  height: auto;
+
+  &__title {
+    @include plan-title;
+  }
+
+  &__sub {
+    margin: 40px 0 $space 0;
+    color: rgba(91, 192, 190, 0.50);
+    font-size: $text;
+    font-weight: $bold;
+    text-transform: uppercase;
+  }
+
+  &__img {
+    border-radius: 25px 25px 0 0;
+    border-right: 1px solid rgba(91, 192, 190, 0.25);
+    border-left: 1px solid rgba(91, 192, 190, 0.25);
+    border-top: 1px solid rgba(91, 192, 190, 0.25);
+
+    img {
+      width: 100%;
+      height: auto;
+      max-width: 400px;
+      border-radius: 25px 25px 0 0;
+    }
+  }
+
+  &__it {
+    margin: -6px 0 $giga-space 0;
+    padding: $big-space $space;
+    border-radius: 0 0 25px 25px;
+    border-right: 1.5px solid rgba(91, 192, 190, 0.30);
+    border-bottom: 1.5px solid rgba(91, 192, 190, 0.30);
+    border-left: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px);
+
+    &--title {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      font-weight: $semi-bold;
+      margin-bottom: $big-space;
+      gap: $small-space;
+
+      .sub {
+        color: rgba(225, 229, 242, 0.75);
+        font-size: $small-text;
+      }
+    }
+
+    &--stage {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: $tiny-space;
+
+      .progress {
+        height: 206px;
+        width: 2px;
+        background-color: $text-color;
+        border-radius: 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        &__dot {
+          width: 10px;
+          height: 10px;
+          background-color: $text-color;
+          border-radius: 25px;
+        }
+
+        .active {
+          background-color: $secondary-color;
+        }
+      }
+    }
+
+    .stages {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: $space;
+      margin-left: $tiny-space;
+
+      &__indiv {
+        display: flex;
+        flex-direction: column;
+        gap: $tiny-space;
+
+        &--title {
+          font-size: $small-text;
+          font-weight: $semi-bold;
+        }
+
+        &--sub {
+          font-size: $tiny-text;
+          font-weight: $semi-bold;
+        }
+      }
+    }
+  }
+
+  &__met {
+    padding: $big-space $space;
+    border-radius: 25px;
+    border: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px);
+
+    &--cards {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .card {
+        padding: $small-space;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 4px;
+        border-radius: $small-radius;
+        background: rgba(11, 19, 43, 0.50);
+
+        &__day {
+          color: rgba(225, 229, 242, 0.75);
+          font-size: $tiny-text;
+          font-weight: $bold;
+        }
+
+        &__temp {
+          font-size: $text;
+          font-weight: $bold;
+        }
+
+        &__rain {
+          color: $blue;
+          font-size: $tiny-text;
+          font-weight: $semi-bold;
+        }
+      }
+    }
+  }
+
+  &__check {
+    margin-bottom: 80px;
+    padding: $big-space $space;
+    border-radius: 25px;
+    border: 1.5px solid rgba(91, 192, 190, 0.30);
+    background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+    background-blend-mode: hard-light;
+    box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(16px);
+    display: flex;
+    flex-direction: column;
+    gap: $space;
+
+    &--el {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .name {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: $small-space;
+
+        &__input {
+          width: 20px;
+          height: 20px;
+          border-radius: 5px;
+          background-color: transparent;
+          border: 1px solid $secondary-color;
+          appearance: none;
+          -webkit-appearance: none;
+          flex-shrink: 0;
+
+          &:checked {
+            background-color: $secondary-color;
+          }
+        }
+
+        &__title {
+          font-weight: $semi-bold;
+        }
+      }
+
+      .perc {
+        font-weight: $bold;
+      }
+
+      .green {
+        color: $green;
+      }
+
+      .yellow {
+        color: $yellow;
+      }
+
+      .red {
+        color: $red;
+      }
+    }
+  }
+}
+
 // Detail 
+
+.detail__title {
+  font-size: $small-title;
+  font-weight: $semi-bold;
+  margin-bottom: $big-space;
+}
+
+.detail {
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $big-space;
+
+    &--el {
+      font-size: $small-text;
+      padding: $small-space;
+      border-radius: 25px;
+      border: 1px solid $secondary-color;
+      background-color: rgba(91, 192, 190, 0.25);
+      color: $text-color;
+      font-weight: $bold;
+      list-style: none;
+      transition: background-color .3s ease;
+    }
+
+    .active {
+      background-color: $secondary-color;
+    }
+  }
+
+  &__content {
+
+    &--el {
+      display: none;
+    }
+
+    .active {
+      display: inherit;
+    }
+  }
+}
 
 // Compte

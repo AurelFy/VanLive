@@ -11,10 +11,12 @@ const isIndexPage = document.querySelector('.main__index') !== null;
 if (isOnboardingPage) {
   const lastBtn = document.querySelector('.fourth__btn');
 
-  lastBtn.addEventListener('click', () => {
-    localStorage.setItem('hasSeenOnboarding', 'true');
-    window.location.href = 'connexion.html';
-  });
+  if (lastBtn) {
+    lastBtn.addEventListener('click', () => {
+      localStorage.setItem('hasSeenOnboarding', 'true');
+      window.location.href = 'connexion.html';
+    });
+  }
 } else if (isConnexionPage || isIndexPage) {
   const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
 
@@ -100,3 +102,30 @@ if (loader) {
     opacity: 0
   });
 }
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+  const navItems = document.querySelectorAll(".detail__nav--el");
+  const contentItems = document.querySelectorAll(".detail__content--el");
+
+  navItems.forEach(item => {
+      item.addEventListener("click", () => {
+
+          // retirer les active
+          navItems.forEach(i => i.classList.remove("active"));
+          contentItems.forEach(c => c.classList.remove("active"));
+
+          // ajouter active sur l’onglet cliqué
+          item.classList.add("active");
+
+          // afficher le bon contenu
+          const target = item.dataset.target;
+          document.getElementById(target).classList.add("active");
+      });
+  });
+
+});
+
+
+
