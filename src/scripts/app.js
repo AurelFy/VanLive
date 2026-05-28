@@ -3,6 +3,20 @@
 import '../styles/style.scss';
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
+import { initializeApp } from "firebase/app";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDrYwhHOXQsnseeUWuN6NGvcC7jTb_J2Bc",
+  authDomain: "vanlive-49f90.firebaseapp.com",
+  projectId: "vanlive-49f90",
+  storageBucket: "vanlive-49f90.firebasestorage.app",
+  messagingSenderId: "833757167722",
+  appId: "1:833757167722:web:2952e5c39c30ea3358ca13"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
 
 const isOnboardingPage = document.querySelector('.main__onboard') !== null;
 const isConnexionPage = document.querySelector('.main__con') !== null;
@@ -25,6 +39,23 @@ if (isOnboardingPage) {
   }
 }
 
+if (isIndexPage) {
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "connexion.html";
+      return;
+    }
+
+    await user.reload();
+    const freshUser = auth.currentUser;
+
+    const nameEl = document.querySelector(".home__title--name"); 
+    if (nameEl) {
+      nameEl.textContent = freshUser.displayName || "Utilisateur";
+    }
+  });
+}
+
 const onboardScreen = document.querySelectorAll(".onboard__screen");
 const onboardBtn = document.querySelectorAll(".onboard__screen--btn");
 
@@ -34,7 +65,6 @@ const planBtn = document.querySelectorAll(".plan__screen--btn");
 let currentOnboardScreen = 0;
 let currentPlanScreen = 0;
 
-// MAJ Onboarding
 function updateOnboardScreens(nextIndex) {
   onboardScreen.forEach((screen, i) => {
     screen.classList.remove("active", "previous");
@@ -47,7 +77,6 @@ function updateOnboardScreens(nextIndex) {
   });
 }
 
-// MAJ Planification
 function updatePlanScreens(nextIndex) {
   planScreen.forEach((screen, i) => {
     screen.classList.remove("active", "previous");
@@ -63,7 +92,6 @@ function updatePlanScreens(nextIndex) {
 updateOnboardScreens(currentOnboardScreen);
 updatePlanScreens(currentPlanScreen);
 
-// Btn Onboard
 onboardBtn.forEach((button) => {
   button.addEventListener("click", () => {
     if (currentOnboardScreen < onboardScreen.length - 1) {
@@ -73,7 +101,6 @@ onboardBtn.forEach((button) => {
   });
 });
 
-// Btn Plan
 planBtn.forEach((button) => {
   button.addEventListener("click", () => {
     if (currentPlanScreen < planScreen.length - 1) {
@@ -103,29 +130,21 @@ if (loader) {
   });
 }
 
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const navItems = document.querySelectorAll(".detail__nav--el");
   const contentItems = document.querySelectorAll(".detail__content--el");
 
   navItems.forEach(item => {
-      item.addEventListener("click", () => {
+    item.addEventListener("click", () => {
+      navItems.forEach(i => i.classList.remove("active"));
+      contentItems.forEach(c => c.classList.remove("active"));
 
-          // retirer les active
-          navItems.forEach(i => i.classList.remove("active"));
-          contentItems.forEach(c => c.classList.remove("active"));
+      item.classList.add("active");
 
-          // ajouter active sur l’onglet cliqué
-          item.classList.add("active");
-
-          // afficher le bon contenu
-          const target = item.dataset.target;
-          document.getElementById(target).classList.add("active");
-      });
+      const target = item.dataset.target;
+      document.getElementById(target).classList.add("active");
+    });
   });
 
 });
-
-
-

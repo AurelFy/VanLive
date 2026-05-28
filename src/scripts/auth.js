@@ -69,15 +69,16 @@ registerBtn.addEventListener("click", async () => {
     );
 
     await updateProfile(userCredential.user, {
-      displayName: registerFirstname.value
+      displayName: registerFirstname.value.trim()
     });
+
+    await userCredential.user.reload();
 
     await signOut(auth);
 
     registerPage.classList.add("hidden");
     loginPage.classList.remove("hidden");
-
-    showMessage("Compte créé avec succès");
+    showMessage("Compte créé avec succès ✓");
 
   } catch (error) {
     justRegistered = false;

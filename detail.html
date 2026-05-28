@@ -93,61 +93,481 @@
             </ul>
 
             <div class="detail__content">
-                <div class="detail__content--el active" id="bat">
+                <div class="detail__content--el" id="bat">
                     <div class="energy">
                         <h2 class="energy__title">énergie</h2>
                         <div class="energy__el">
-                          <p class="energy__el--title">batterie et panneaux</p>
-                  
-                          <div class="energy__el--cards">
-                            <div class="card">
-                              <span class="card__numb card__numb--green">67%</span>
-                              <span class="card__name">Batterie</span>
+                            <p class="energy__el--title">batterie et panneaux</p>
+
+                            <div class="energy__el--cards">
+                                <div class="card">
+                                    <span class="card__numb card__numb--green">67%</span>
+                                    <span class="card__name">Batterie</span>
+                                </div>
+                                <div class="card">
+                                    <span class="card__numb card__numb--yellow">152W</span>
+                                    <span class="card__name">Panneaux</span>
+                                </div>
+                                <div class="card">
+                                    <span class="card__numb card__numb--blue">~18h</span>
+                                    <span class="card__name">Autonomie</span>
+                                </div>
                             </div>
-                            <div class="card">
-                              <span class="card__numb card__numb--yellow">152W</span>
-                              <span class="card__name">Panneaux</span>
+
+                            <div class="energy__el--bar">
+                                <div class="bat">
+                                    <div class="bat__info">
+                                        <span class="bat__info--text">Batterie principale</span>
+                                        <span class="bat__info--numb">67%</span>
+                                    </div>
+                                    <div class="bat__bar"></div>
+                                </div>
+                                <div class="cons">
+                                    <div class="cons__info">
+                                        <span class="cons__info--text">Consommation</span>
+                                        <span class="cons__info--numb">41W</span>
+                                    </div>
+                                    <div class="cons__bar"></div>
+                                </div>
                             </div>
-                            <div class="card">
-                              <span class="card__numb card__numb--blue">~18h</span>
-                              <span class="card__name">Autonomie</span>
+                        </div>
+                    </div>
+
+                    <div class="prod">
+                        <h2 class="prod__title">production dernières 24h</h2>
+                        <div class="prod__el">
+                            <div class="prod__el--chart">
+                                <img src="./public/images/detail_batgraph.png" alt="Production sur les dernières 24h">
                             </div>
-                          </div>
-                  
-                          <div class="energy__el--bar">
-                            <div class="bat">
-                              <div class="bat__info">
-                                <span class="bat__info--text">Batterie principale</span>
-                                <span class="bat__info--numb">67%</span>
-                              </div>
-                              <div class="bat__bar"></div>
+
+                            <div class="prod__el--desc">
+                                <span class="txt">Pic aujourd'hui</span>
+                                <span class="num">217W à 11h30</span>
                             </div>
-                            <div class="cons">
-                              <div class="cons__info">
-                                <span class="cons__info--text">Consommation</span>
-                                <span class="cons__info--numb">41W</span>
-                              </div>
-                              <div class="cons__bar"></div>
-                            </div>
-                          </div>
                         </div>
                     </div>
                 </div>
+
+
                 <div class="detail__content--el" id="eau">
-                    <h2>Eau</h2>
-                    <p>Eau</p>
+                    <div class="wat">
+                        <h2 class="wat__title">Eau</h2>
+
+                        <div class="wat__el">
+                            <p class="wat__el--title">Réservoirs</p>
+
+                            <div class="wat__el--cards">
+                                <div class="card">
+                                    <span class="card__numb card__numb--secondary">56%</span>
+                                    <span class="card__name">Eau claire</span>
+                                </div>
+                                <div class="card">
+                                    <span class="card__numb card__numb--grey">34%</span>
+                                    <span class="card__name">Eau grise</span>
+                                </div>
+                                <div class="card">
+                                    <span class="card__numb card__numb--blue">~3j</span>
+                                    <span class="card__name">Autonomie</span>
+                                </div>
+                            </div>
+
+                            <div class="wat__el--bar">
+                                <div class="eauc">
+                                    <div class="eauc__info">
+                                        <span class="eauc__info--text">Réservoir eau claire</span>
+                                        <span class="eauc__info--numb">56%</span>
+                                    </div>
+                                    <div class="eauc__bar"></div>
+                                </div>
+                                <div class="wat__el--bar grey">
+                                    <div class="eaug">
+                                        <div class="eaug__info">
+                                            <span class="eaug__info--text">Réservoir eau grise</span>
+                                            <span class="eaug__info--numb">34%</span>
+                                        </div>
+                                        <div class="eaug__bar"></div>
+                                    </div>
+                                    <div class="cons">
+                                        <div class="cons__info">
+                                            <span class="cons__info--text">Consommation</span>
+                                            <span class="cons__info--numb">24L</span>
+                                        </div>
+                                        <div class="cons__bar"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="wat">
+                        <h2 class="wat__title">Consommation des 7 derniers jours</h2>
+
+                        <div class="wat__el">
+                            <div class="wat__el--graph">
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--1" data-litres="22L"></div>
+                                    <span class="graph__day">Sam</span>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--2" data-litres="16L"></div>
+                                    <span class="graph__day">Dim</span>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--3" data-litres="18L"></div>
+                                    <span class="graph__day">Lun</span>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--4" data-litres="14L"></div>
+                                    <span class="graph__day">Mar</span>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--5" data-litres="21L"></div>
+                                    <span class="graph__day">Mer</span>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--6" data-litres="19L"></div>
+                                    <span class="graph__day">Jeu</span>
+                                </div>
+                                <div class="graph">
+                                    <div class="graph__cons graph__cons--7" data-litres="12L"></div>
+                                    <span class="graph__day graph__day--auj">Auj</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="detail__content--el" id="climat">
-                    <h2>Climat</h2>
-                    <p>Climat</p>
+                    <div class="energy">
+                        <h2 class="energy__title">Température</h2>
+                        <div class="energy__el">
+
+                            <div class="energy__el--cards">
+                                <div class="card">
+                                    <span class="card__name">Intérieur</span>
+                                    <span class="card__numb">21°C</span>
+                                </div>
+                                <div class="card">
+                                    <span class="card__name">Extérieur</span>
+                                    <span class="card__numb">14°C</span>
+                                </div>
+                                <div class="card">
+                                    <span class="card__name">Ressenti</span>
+                                    <span class="card__numb">11°C</span>
+                                </div>
+                            </div>
+
+                            <div class="energy__el--bar">
+                                <div class="eauc">
+                                    <div class="eauc__info">
+                                        <span class="eauc__info--text">Humidité</span>
+                                        <span class="eauc__info--numb">41%</span>
+                                    </div>
+                                    <div class="cons__bar"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="energy">
+                        <h2 class="energy__title">ventilation</h2>
+                        <div class="energy__el">
+                            <div class="energy__el--eq">
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <svg class="eq__log--logo second" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 20 20" fill="none">
+                                            <path
+                                                d="M9.98502 9C9.7202 9 9.46623 9.10536 9.27897 9.29289C9.09172 9.48043 8.98652 9.73478 8.98652 10C8.98652 10.2652 9.09172 10.5196 9.27897 10.7071C9.46623 10.8946 9.7202 11 9.98502 11C10.2498 11 10.5038 10.8946 10.6911 10.7071C10.8783 10.5196 10.9835 10.2652 10.9835 10C10.9835 9.73478 10.8783 9.48043 10.6911 9.29289C10.5038 9.10536 10.2498 9 9.98502 9ZM10.4843 0C14.9775 0 15.0874 3.57 12.7309 4.75C11.7424 5.24 11.303 6.29 11.1133 7.22C11.5926 7.42 12.012 7.73 12.3315 8.13C16.026 6.13 20 6.92 20 10.5C20 15 16.4353 15.1 15.2571 12.73C14.7579 11.74 13.6995 11.3 12.7708 11.11C12.5711 11.59 12.2616 12 11.8622 12.34C13.8492 16.03 13.0604 20 9.48577 20C4.99251 20 4.90265 16.42 7.25911 15.24C8.23764 14.75 8.67698 13.71 8.87669 12.79C8.38742 12.59 7.95806 12.27 7.63854 11.87C3.95407 13.85 0 13.07 0 9.5C0 5 3.55467 4.89 4.7329 7.26C5.23215 8.25 6.28058 8.68 7.20919 8.87C7.3989 8.39 7.71842 7.97 8.12781 7.65C6.14079 3.96 6.92961 0 10.4843 0Z"
+                                                fill="#5BC0BE" />
+                                        </svg>
+                                        <span class="eq__log--text">Ventilation toit</span>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch1" />
+                                        <label class="eq__toggle--label" for="switch1">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <svg class="eq__log--logo yellow" xmlns="http://www.w3.org/2000/svg" width="19"
+                                            height="24" viewBox="0 0 16 20" fill="none">
+                                            <path
+                                                d="M14.4799 9.11137C14.2171 8.77803 13.8972 8.48913 13.6001 8.20023C12.8345 7.53355 11.9661 7.05576 11.2348 6.35574C9.53226 4.73347 9.15519 2.05561 10.2407 0C9.15519 0.255563 8.20679 0.833357 7.39551 1.46671C4.43605 3.77789 3.27055 7.85578 4.66458 11.3559C4.71029 11.467 4.75599 11.5781 4.75599 11.7226C4.75599 11.967 4.5846 12.1892 4.35607 12.2781C4.09326 12.3892 3.81902 12.3226 3.60192 12.1448C3.53707 12.092 3.48283 12.0279 3.44195 11.9559C2.15076 10.367 1.94508 8.08912 2.81349 6.26685C0.90527 7.778 -0.134539 10.3336 0.0140051 12.7448C0.082564 13.3004 0.151123 13.856 0.345373 14.4115C0.505344 15.0782 0.813859 15.7449 1.15665 16.3338C2.39071 18.2561 4.52746 19.6339 6.82419 19.9117C9.26945 20.2117 11.8861 19.7783 13.7601 18.1339C15.8511 16.2894 16.5824 13.3337 15.5083 10.8003L15.3598 10.5114C15.1198 10.0003 14.4799 9.11137 14.4799 9.11137ZM10.8692 16.1116C10.5492 16.3782 10.0236 16.6671 9.61225 16.7783C8.33248 17.2227 7.05272 16.6005 6.29857 15.8671C7.65832 15.556 8.4696 14.5782 8.70955 13.5893C8.9038 12.7004 8.53816 11.967 8.38961 11.1114C8.2525 10.2892 8.27535 9.58916 8.58386 8.82247C8.80097 9.24471 9.0295 9.66694 9.30373 10.0003C10.1836 11.1114 11.5662 11.6003 11.8633 13.1115C11.909 13.267 11.9318 13.4226 11.9318 13.5893C11.9661 14.5004 11.5547 15.5004 10.8692 16.1116Z"
+                                                fill="#FFC61A" />
+                                        </svg>
+                                        <span class="eq__log--text">Chauffage diesel</span>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch2" />
+                                        <label class="eq__toggle--label" for="switch2">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <svg class="eq__log--logo blue" xmlns="http://www.w3.org/2000/svg" width="15"
+                                            height="24" viewBox="0 0 13 20" fill="none">
+                                            <path
+                                                d="M2.78571 8.4138V3.63644C2.78571 2.67199 3.17704 1.74705 3.8736 1.06509C4.57017 0.383123 5.51491 0 6.5 0C7.48509 0 8.42983 0.383123 9.1264 1.06509C9.82296 1.74705 10.2143 2.67199 10.2143 3.63644V8.4138C11.3499 9.18798 12.2035 10.2968 12.6509 11.5788C13.0983 12.8609 13.1161 14.2493 12.7017 15.5419C12.2873 16.8345 11.4624 17.964 10.3469 18.7658C9.23151 19.5676 7.88381 20 6.5 20C5.11619 20 3.76849 19.5676 2.65306 18.7658C1.53762 17.964 0.712677 16.8345 0.298285 15.5419C-0.116107 14.2493 -0.0983146 12.8609 0.349071 11.5788C0.796457 10.2968 1.65009 9.18798 2.78571 8.4138ZM2.78571 13.6366C2.78571 14.6011 3.17704 15.526 3.8736 16.208C4.57017 16.8899 5.51491 17.2731 6.5 17.2731C7.48509 17.2731 8.42983 16.8899 9.1264 16.208C9.82296 15.526 10.2143 14.6011 10.2143 13.6366H2.78571Z"
+                                                fill="#4A9EFF" />
+                                        </svg>
+                                        <span class="eq__log--text">Climatisation</span>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch3" />
+                                        <label class="eq__toggle--label" for="switch3">Toggle</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="detail__content--el" id="equipement">
-                    <h2>Équipement</h2>
-                    <p>Équipement</p>
+                    <div class="energy">
+                        <h2 class="energy__title">équipements</h2>
+                        <div class="energy__el">
+                            <div class="energy__el--eq">
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <div class="eq__log--big ecl">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="21"
+                                                viewBox="0 0 15 21" fill="none">
+                                                <path
+                                                    d="M4.28571 18.901H10.7143V21H4.28571V18.901ZM3.39643 13.7061C3.83571 14.3568 4.06071 15.1334 4.16786 15.7526H3.21429V17.8516H11.7857V15.7526H10.8321C10.95 15.1334 11.1643 14.3568 11.6036 13.7061C11.9893 13.1394 12.4179 12.6462 12.825 12.1739C13.8964 10.9355 15 9.66567 15 7.34633C15 3.29535 11.6357 0 7.5 0C3.36429 0 0 3.29535 0 7.34633C0 9.66567 1.10357 10.9355 2.16429 12.1529C2.58214 12.6252 3 13.1184 3.39643 13.6957V13.7061ZM7.5 2.10945C10.4571 2.10945 12.8571 4.46027 12.8571 7.35682C12.8571 8.89955 12.1929 9.66567 11.1964 10.8201C10.7679 11.3133 10.2857 11.8696 9.825 12.5412C9.09643 13.6222 8.78571 14.8816 8.65714 15.7526H6.33214C6.20357 14.8816 5.90357 13.6222 5.175 12.5517C4.71429 11.8696 4.22143 11.3028 3.79286 10.8096C2.79643 9.66567 2.14286 8.91004 2.14286 7.35682C2.14286 4.46027 4.54286 2.10945 7.5 2.10945Z"
+                                                    fill="#6DFF57" />
+                                            </svg>
+                                        </div>
+                                        <div class="eq__log--desc">
+                                            <span class="title">Éclairage salon</span>
+                                            <span class="sub">3W · Chaud</span>
+                                        </div>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch14" />
+                                        <label class="eq__toggle--label" for="switch14">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <div class="eq__log--big ecl">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="21"
+                                                viewBox="0 0 15 21" fill="none">
+                                                <path
+                                                    d="M4.28571 18.901H10.7143V21H4.28571V18.901ZM3.39643 13.7061C3.83571 14.3568 4.06071 15.1334 4.16786 15.7526H3.21429V17.8516H11.7857V15.7526H10.8321C10.95 15.1334 11.1643 14.3568 11.6036 13.7061C11.9893 13.1394 12.4179 12.6462 12.825 12.1739C13.8964 10.9355 15 9.66567 15 7.34633C15 3.29535 11.6357 0 7.5 0C3.36429 0 0 3.29535 0 7.34633C0 9.66567 1.10357 10.9355 2.16429 12.1529C2.58214 12.6252 3 13.1184 3.39643 13.6957V13.7061ZM7.5 2.10945C10.4571 2.10945 12.8571 4.46027 12.8571 7.35682C12.8571 8.89955 12.1929 9.66567 11.1964 10.8201C10.7679 11.3133 10.2857 11.8696 9.825 12.5412C9.09643 13.6222 8.78571 14.8816 8.65714 15.7526H6.33214C6.20357 14.8816 5.90357 13.6222 5.175 12.5517C4.71429 11.8696 4.22143 11.3028 3.79286 10.8096C2.79643 9.66567 2.14286 8.91004 2.14286 7.35682C2.14286 4.46027 4.54286 2.10945 7.5 2.10945Z"
+                                                    fill="#6DFF57" />
+                                            </svg>
+                                        </div>
+                                        <div class="eq__log--desc">
+                                            <span class="title">Éclairage cuisine</span>
+                                            <span class="sub">5W · Blanc</span>
+                                        </div>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch15" />
+                                        <label class="eq__toggle--label" for="switch15">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <div class="eq__log--big yellow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="13"
+                                                viewBox="0 0 21 13" fill="none">
+                                                <path d="M5.25 7.35V5.25H12.6V7.35H5.25Z" fill="#FFC61A" />
+                                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                                    d="M0 2.1C0 1.54305 0.221249 1.0089 0.615076 0.615076C1.0089 0.221249 1.54305 0 2.1 0H15.75C16.307 0 16.8411 0.221249 17.2349 0.615076C17.6288 1.0089 17.85 1.54305 17.85 2.1V10.5C17.85 11.057 17.6288 11.5911 17.2349 11.9849C16.8411 12.3788 16.307 12.6 15.75 12.6H2.1C1.54305 12.6 1.0089 12.3788 0.615076 11.9849C0.221249 11.5911 0 11.057 0 10.5V2.1ZM4.2 3.15C3.92152 3.15 3.65445 3.26063 3.45754 3.45754C3.26063 3.65445 3.15 3.92152 3.15 4.2V8.4C3.15 8.67848 3.26063 8.94555 3.45754 9.14246C3.65445 9.33938 3.92152 9.45 4.2 9.45H13.65C13.9285 9.45 14.1955 9.33938 14.3925 9.14246C14.5894 8.94555 14.7 8.67848 14.7 8.4V4.2C14.7 3.92152 14.5894 3.65445 14.3925 3.45754C14.1955 3.26063 13.9285 3.15 13.65 3.15H4.2Z"
+                                                    fill="#FFC61A" />
+                                                <path
+                                                    d="M20.9999 8.3999V4.1999C20.9999 3.92143 20.8893 3.65435 20.6924 3.45744C20.4955 3.26053 20.2284 3.1499 19.9499 3.1499H18.8999V9.4499H19.9499C20.2284 9.4499 20.4955 9.33928 20.6924 9.14236C20.8893 8.94545 20.9999 8.67838 20.9999 8.3999Z"
+                                                    fill="#FFC61A" />
+                                            </svg>
+                                        </div>
+                                        <div class="eq__log--desc">
+                                            <span class="title">Convertisseur 220V</span>
+                                            <span class="sub">18W · Actif</span>
+                                        </div>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch16" />
+                                        <label class="eq__toggle--label" for="switch16">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <div class="eq__log--big blue">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="19"
+                                                viewBox="0 0 21 19" fill="none">
+                                                <path
+                                                    d="M18.9 4.22222H15.75V2.11111C15.75 1.55121 15.5287 1.01424 15.1349 0.61833C14.7411 0.22242 14.207 0 13.65 0H7.35C6.79305 0 6.2589 0.22242 5.86508 0.61833C5.47125 1.01424 5.25 1.55121 5.25 2.11111V4.22222H2.1C1.54305 4.22222 1.0089 4.44464 0.615076 4.84055C0.221249 5.23646 0 5.77343 0 6.33333V16.8889C0 17.4488 0.221249 17.9858 0.615076 18.3817C1.0089 18.7776 1.54305 19 2.1 19H18.9C19.457 19 19.9911 18.7776 20.3849 18.3817C20.7787 17.9858 21 17.4488 21 16.8889V6.33333C21 5.77343 20.7787 5.23646 20.3849 4.84055C19.9911 4.44464 19.457 4.22222 18.9 4.22222ZM7.35 2.11111H13.65V4.22222H7.35V2.11111ZM14.7 12.6667H11.55V15.8333H9.45V12.6667H6.3V10.5556H9.45V7.38889H11.55V10.5556H14.7V12.6667Z"
+                                                    fill="#4A9EFF" />
+                                            </svg>
+                                        </div>
+                                        <div class="eq__log--desc">
+                                            <span class="title">Frigo</span>
+                                            <span class="sub">12W · 4°C</span>
+                                        </div>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch17" />
+                                        <label class="eq__toggle--label" for="switch17">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <div class="eq__log--big yellow">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="15" height="21"
+                                                viewBox="0 0 15 21" fill="none">
+                                                <path
+                                                    d="M5.98714 20.3836C5.56714 19.972 5.35714 19.4775 5.35714 18.9C5.35714 18.5325 5.45536 18.1912 5.65178 17.8762C5.84821 17.5612 6.10714 17.3075 6.42857 17.115V14.7H3.21429C2.625 14.7 2.12071 14.4945 1.70143 14.0836C1.28214 13.6727 1.07214 13.1782 1.07143 12.6V10.185C0.75 10.0275 0.491072 9.79125 0.294643 9.47625C0.0982144 9.16125 0 8.8025 0 8.4C0 7.8225 0.21 7.32795 0.63 6.91635C1.05 6.50475 1.55429 6.2993 2.14286 6.3C2.73143 6.3007 3.23607 6.5065 3.65679 6.9174C4.0775 7.3283 4.28714 7.8225 4.28571 8.4C4.28571 8.8025 4.1875 9.1525 3.99107 9.45C3.79464 9.7475 3.53571 9.9925 3.21429 10.185V12.6H6.42857V4.2H4.28571L7.5 0L10.7143 4.2H8.57143V12.6H11.7857V10.5H10.7143V6.3H15V10.5H13.9286V12.6C13.9286 13.1775 13.7189 13.672 13.2996 14.0836C12.8804 14.4952 12.3757 14.7007 11.7857 14.7H8.57143V17.115C8.91071 17.29 9.17428 17.535 9.36214 17.85C9.55 18.165 9.64357 18.515 9.64286 18.9C9.64286 19.4775 9.43321 19.972 9.01393 20.3836C8.59464 20.7952 8.09 21.0007 7.5 21C6.91 20.9993 6.40571 20.7938 5.98714 20.3836Z"
+                                                    fill="#FFC61A" />
+                                            </svg>
+                                        </div>
+                                        <div class="eq__log--desc">
+                                            <span class="title">Prise USB-C salon</span>
+                                            <span class="sub">45W · Charge rapide</span>
+                                        </div>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch18" />
+                                        <label class="eq__toggle--label" for="switch18">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="eq">
+                                    <div class="eq__log">
+                                        <div class="eq__log--big purple">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21" height="16"
+                                                viewBox="0 0 21 16" fill="none">
+                                                <path
+                                                    d="M8.86173 15.3176C8.41563 14.8627 8.19257 14.3059 8.19257 13.6471C8.19257 12.9882 8.41563 12.4314 8.86173 11.9765C9.30783 11.5216 9.85392 11.2941 10.5 11.2941C11.1461 11.2941 11.6922 11.5216 12.1383 11.9765C12.5844 12.4314 12.8074 12.9882 12.8074 13.6471C12.8074 14.3059 12.5844 14.8627 12.1383 15.3176C11.6922 15.7725 11.1461 16 10.5 16C9.85392 16 9.30783 15.7725 8.86173 15.3176ZM13.7885 6.21177C14.8266 6.58824 15.7686 7.10588 16.6147 7.76471C16.9223 8 17.0802 8.30996 17.0882 8.69459C17.0962 9.07922 16.9614 9.41239 16.6839 9.69412C16.4224 9.96078 16.0994 10.0982 15.7148 10.1064C15.3302 10.1145 14.9841 10.0085 14.6764 9.78823C14.0919 9.38039 13.4458 9.05882 12.7382 8.82353C12.0306 8.58823 11.2845 8.47059 10.5 8.47059C9.71548 8.47059 8.96941 8.58823 8.2618 8.82353C7.55419 9.05882 6.90811 9.38039 6.32356 9.78823C6.0159 10.0078 5.66979 10.1098 5.28522 10.0941C4.90065 10.0784 4.57761 9.93725 4.3161 9.67059C4.05459 9.38824 3.92384 9.05506 3.92384 8.67106C3.92384 8.28706 4.07767 7.9771 4.38532 7.74118C5.23138 7.08235 6.17373 6.56847 7.21238 6.19953C8.25103 5.83059 9.3469 5.64643 10.5 5.64706C11.6531 5.64769 12.7493 5.83592 13.7885 6.21177ZM15.9335 0.964706C17.6336 1.60784 19.1605 2.51765 20.5142 3.69412C20.8219 3.96078 20.9834 4.2902 20.9988 4.68235C21.0142 5.07451 20.8834 5.41177 20.6065 5.69412C20.345 5.96078 20.022 6.0982 19.6374 6.10635C19.2528 6.11451 18.9067 5.99278 18.5991 5.74118C17.4915 4.81569 16.2495 4.0982 14.873 3.58871C13.4966 3.07922 12.0389 2.82416 10.5 2.82353C8.9611 2.8229 7.50373 3.07796 6.12789 3.58871C4.75205 4.09945 3.50973 4.81694 2.40094 5.74118C2.09328 5.99216 1.74717 6.11388 1.3626 6.10635C0.978024 6.09882 0.654985 5.96141 0.393477 5.69412C0.116586 5.41177 -0.0141684 5.07451 0.00121443 4.68235C0.0165973 4.2902 0.178117 3.96078 0.485774 3.69412C1.83946 2.51765 3.36636 1.60784 5.06647 0.964706C6.76659 0.321569 8.57776 0 10.5 0C12.4222 0 14.2337 0.321569 15.9344 0.964706"
+                                                    fill="#8A38F5" />
+                                            </svg>
+                                        </div>
+                                        <div class="eq__log--desc">
+                                            <span class="title">Routeur Wi-Fi</span>
+                                            <span class="sub">3W · Connecté</span>
+                                        </div>
+                                    </div>
+                                    <div class="eq__toggle">
+                                        <input class="eq__toggle--input" type="checkbox" id="switch18" />
+                                        <label class="eq__toggle--label" for="switch18">Toggle</label>
+                                    </div>
+                                </div>
+                                <div class="separator"></div>
+                                <div class="total">
+                                    <span class="total__text">Consommation totale active</span>
+                                    <span class="total__num">**W</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="detail__content--el" id="vehicule">
-                    <h2>Véhicule</h2>
-                    <p>Véhicule</p>
+                <div class="detail__content--el active" id="vehicule">
+                    <div class="veh">
+                        <h2 class="veh__title">véhicule</h2>
+
+                        <div class="veh__carb">
+                            <div class="veh__carb--info">
+                                <svg class="logo" xmlns="http://www.w3.org/2000/svg" width="43" height="40"
+                                    viewBox="0 0 27 24" fill="none">
+                                    <path
+                                        d="M19.737 0.293333L18.0495 2.37333L23.274 6.50667C23.922 7.01333 24.2865 7.77333 24.2865 8.58667V20C24.2865 20.7333 23.679 21.3333 22.9365 21.3333C22.194 21.3333 21.5865 20.7333 21.5865 20V16C21.5865 13.8 19.764 12 17.5365 12H16.1865V2.66667C16.1865 1.2 14.9715 0 13.4865 0H2.7C1.215 0 0 1.2 0 2.66667V21.3333C0 22.8 1.215 24 2.7 24H13.5C14.985 24 16.2 22.8 16.2 21.3333V14.6667H17.55C18.2925 14.6667 18.9 15.2667 18.9 16V20C18.9 22.2 20.7225 24 22.95 24C25.1775 24 27 22.2 27 20V8.58667C27 6.96 26.2575 5.44 24.975 4.42667L19.7505 0.293333H19.737ZM13.5 2.66667V8H2.7V2.66667H13.5ZM2.7 21.3333V10.6667H13.5V21.3333H2.7Z"
+                                        fill="#FFC61A" />
+                                </svg>
+                                <div class="infos">
+                                    <span class="infos__num">64%</span>
+                                    <span class="infos__desc">Carburant</span>
+                                </div>
+                            </div>
+                            <div class="veh__carb--bar"></div>
+                        </div>
+                        <div class="veh__mot">
+                            <div class="veh__mot--kil">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 17 17"
+                                    fill="none">
+                                    <path
+                                        d="M8.5 16C12.6421 16 16 12.6421 16 8.5C16 4.35786 12.6421 1 8.5 1C4.35786 1 1 4.35786 1 8.5C1 12.6421 4.35786 16 8.5 16Z"
+                                        stroke="#4A9EFF" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                    <path d="M8.5 4V8.5L11.5 10" stroke="#4A9EFF" stroke-width="2"
+                                        stroke-linecap="round" stroke-linejoin="round" />
+                                </svg>
+                                <span class="title">53297</span>
+                                <span class="desc">Kilométrage</span>
+                            </div>
+                            <div class="veh__mot--kil">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="16" viewBox="0 0 27 16"
+                                    fill="none">
+                                    <path d="M6.6665 9.33341V6.66675H15.9999V9.33341H6.6665Z" fill="#5BC0BE" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M0 2.66667C0 1.95942 0.280953 1.28115 0.781052 0.781048C1.28115 0.280951 1.95943 0 2.66668 0H20.0001C20.7073 0 21.3856 0.280951 21.8857 0.781048C22.3858 1.28115 22.6668 1.95942 22.6668 2.66667V13.3333C22.6668 14.0406 22.3858 14.7189 21.8857 15.219C21.3856 15.719 20.7073 16 20.0001 16H2.66668C1.95943 16 1.28115 15.719 0.781052 15.219C0.280953 14.7189 0 14.0406 0 13.3333V2.66667ZM5.33336 4C4.97974 4 4.6406 4.14048 4.39055 4.39052C4.1405 4.64057 4.00002 4.97971 4.00002 5.33333V10.6667C4.00002 11.0203 4.1405 11.3594 4.39055 11.6095C4.6406 11.8595 4.97974 12 5.33336 12H17.3334C17.687 12 18.0262 11.8595 18.2762 11.6095C18.5263 11.3594 18.6668 11.0203 18.6668 10.6667V5.33333C18.6668 4.97971 18.5263 4.64057 18.2762 4.39052C18.0262 4.14048 17.687 4 17.3334 4H5.33336Z"
+                                        fill="#5BC0BE" />
+                                    <path
+                                        d="M26.6667 10.6667V5.33333C26.6667 4.97971 26.5262 4.64057 26.2762 4.39052C26.0261 4.14048 25.687 4 25.3333 4H24V12H25.3333C25.687 12 26.0261 11.8595 26.2762 11.6095C26.5262 11.3594 26.6667 11.0203 26.6667 10.6667Z"
+                                        fill="#5BC0BE" />
+                                </svg>
+                                <span class="title">12.7V</span>
+                                <span class="desc">Batterie moteur</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pneu">
+                        <h2 class="pneu__title">pression des pneus</h2>
+
+                        <div class="pneu__press">
+                            <div class="pneu__press--indiv">
+                                <span class="loc">Avant gauche</span>
+                                <div class="bar bar__mid"></div>
+                                <span class="press">2.3 bar</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10"
+                                    fill="none">
+                                    <path
+                                        d="M4.89571 10L0 5.25988L1.22393 4.07484L4.89571 7.62994L12.7761 0L14 1.18503L4.89571 10Z"
+                                        fill="#5BC0BE" />
+                                </svg>
+                            </div>
+                            <div class="pneu__press--indiv">
+                                <span class="loc">Avant droit</span>
+                                <div class="bar bar__full"></div>
+                                <span class="press">2.4 bar</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10"
+                                    fill="none">
+                                    <path
+                                        d="M4.89571 10L0 5.25988L1.22393 4.07484L4.89571 7.62994L12.7761 0L14 1.18503L4.89571 10Z"
+                                        fill="#5BC0BE" />
+                                </svg>
+                            </div>
+                            <div class="pneu__press--indiv">
+                                <span class="loc">Arrière gauche</span>
+                                <div class="bar bar__low"></div>
+                                <span class="press">2.2 bar</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="10" viewBox="0 0 14 10"
+                                    fill="none">
+                                    <path
+                                        d="M4.89571 10L0 5.25988L1.22393 4.07484L4.89571 7.62994L12.7761 0L14 1.18503L4.89571 10Z"
+                                        fill="#5BC0BE" />
+                                </svg>
+                            </div>
+                            <div class="pneu__press--indiv danger">
+                                <span class="loc">Arrière droit</span>
+                                <div class="bar bar__danger"></div>
+                                <span class="press">1.9 bar</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 14 14"
+                                    fill="none">
+                                    <path
+                                        d="M6.9998 2.80005C7.18546 2.80005 7.3635 2.8738 7.49478 3.00507C7.62605 3.13635 7.6998 3.3144 7.6998 3.50005V7.70005C7.6998 7.8857 7.62605 8.06375 7.49478 8.19502C7.3635 8.3263 7.18546 8.40005 6.9998 8.40005C6.81415 8.40005 6.63611 8.3263 6.50483 8.19502C6.37355 8.06375 6.2998 7.8857 6.2998 7.70005V3.50005C6.2998 3.3144 6.37355 3.13635 6.50483 3.00507C6.63611 2.8738 6.81415 2.80005 6.9998 2.80005ZM6.9998 9.80005C6.81415 9.80005 6.63611 9.8738 6.50483 10.0051C6.37355 10.1363 6.2998 10.3144 6.2998 10.5C6.2998 10.6857 6.37355 10.8637 6.50483 10.995C6.63611 11.1263 6.81415 11.2 6.9998 11.2C7.18546 11.2 7.3635 11.1263 7.49478 10.995C7.62605 10.8637 7.6998 10.6857 7.6998 10.5C7.6998 10.3144 7.62605 10.1363 7.49478 10.0051C7.3635 9.8738 7.18546 9.80005 6.9998 9.80005Z"
+                                        fill="#FFC61A" />
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M7 0C3.1339 0 0 3.1339 0 7C0 10.8661 3.1339 14 7 14C10.8661 14 14 10.8661 14 7C14 3.1339 10.8661 0 7 0ZM1.4 7C1.4 8.48521 1.99 9.90959 3.0402 10.9598C4.09041 12.01 5.51479 12.6 7 12.6C8.48521 12.6 9.90959 12.01 10.9598 10.9598C12.01 9.90959 12.6 8.48521 12.6 7C12.6 5.51479 12.01 4.09041 10.9598 3.0402C9.90959 1.99 8.48521 1.4 7 1.4C5.51479 1.4 4.09041 1.99 3.0402 3.0402C1.99 4.09041 1.4 5.51479 1.4 7Z"
+                                        fill="#FFC61A" />
+                                </svg>
+                            </div>
+                            <div class="pneu__press--recom">
+                                <span class="text">Pression recommandée</span>
+                                <span class="num">2.4 bar / pneu</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
