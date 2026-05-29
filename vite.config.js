@@ -11,7 +11,7 @@ export default defineConfig({
         connexion: resolve(__dirname, "connexion.html"),
         onboarding: resolve(__dirname, "onboarding.html"),
         plan: resolve(__dirname, "plan.html"),
-        detail: resolve(__dirname, "detail.html"),
+        compte: resolve(__dirname, "compte.html"),
       }
     }
   }

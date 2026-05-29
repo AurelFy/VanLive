@@ -56,6 +56,32 @@ if (isIndexPage) {
   });
 }
 
+const isAccountPage = document.querySelector(".account") !== null;
+
+if (isAccountPage) {
+  onAuthStateChanged(auth, async (user) => {
+    if (!user) {
+      window.location.href = "connexion.html";
+      return;
+    }
+
+    await user.reload();
+
+    const freshUser = auth.currentUser;
+
+    const nameEl = document.querySelector(".pers__name");
+    const mailEl = document.querySelector(".pers__mail");
+
+    if (nameEl) {
+      nameEl.textContent = freshUser.displayName || "Utilisateur";
+    }
+
+    if (mailEl) {
+      mailEl.textContent = freshUser.email || "Aucun email";
+    }
+  });
+}
+
 const onboardScreen = document.querySelectorAll(".onboard__screen");
 const onboardBtn = document.querySelectorAll(".onboard__screen--btn");
 
@@ -106,16 +132,42 @@ planBtn.forEach((button) => {
     if (currentPlanScreen < planScreen.length - 1) {
       currentPlanScreen++;
       updatePlanScreens(currentPlanScreen);
+
+      if (currentPlanScreen === seplanIndex) {
+        sessionStorage.setItem('hasReachedSeplan', 'true');
+      }
     }
   });
 });
+
+const backBtn = document.querySelectorAll(".back__btn");
+
+backBtn.forEach((button) => {
+  button.addEventListener("click", () => {
+    if (currentPlanScreen > 0) {
+      currentPlanScreen--;
+      updatePlanScreens(currentPlanScreen);
+    }
+  });
+});
+
+const seplanIndex = Array.from(planScreen).findIndex(s => s.classList.contains('seplan'));
+const hasReachedSeplan = sessionStorage.getItem('hasReachedSeplan') === 'true';
+
+if (hasReachedSeplan && seplanIndex !== -1) {
+  currentPlanScreen = seplanIndex;
+}
+
+updatePlanScreens(currentPlanScreen);
+
+
 
 const loader = document.querySelector(".loader");
 const loaderText = document.querySelector(".loader__title");
 
 if (loader) {
   gsap.to(loader, {
-    delay: 3,
+    delay: 2,
     duration: 1,
     opacity: 0,
     onComplete: () => {
@@ -124,7 +176,27 @@ if (loader) {
   });
 
   gsap.to(loaderText, {
-    delay: 2,
+    delay: 1,
+    duration: 1,
+    opacity: 0
+  });
+}
+
+const loadFast = document.querySelector(".loadfast");
+const loadFastText = document.querySelector(".loader__title");
+
+if (loadFast) {
+  gsap.to(loadFast, {
+    delay: 0.5,
+    duration: 1,
+    opacity: 0,
+    onComplete: () => {
+      loadFast.style.display = "none";
+    }
+  });
+
+  gsap.to(loadFastText, {
+    delay: 0.5,
     duration: 1,
     opacity: 0
   });

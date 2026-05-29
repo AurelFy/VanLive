@@ -383,7 +383,10 @@ header {
   bottom: 0;
   left: 0;
   width: 100%;
+  max-width: 480px;
   z-index: 9999;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .menu {
@@ -1995,7 +1998,7 @@ header {
               border-radius: $small-radius;
             }
 
-            .bar__mid{
+            .bar__mid {
               position: relative;
 
               &::before {
@@ -2025,7 +2028,7 @@ header {
               }
             }
 
-            .bar__low{
+            .bar__low {
               position: relative;
 
               &::before {
@@ -2064,7 +2067,7 @@ header {
               border-radius: $small-radius;
             }
 
-            .bar__danger{
+            .bar__danger {
               position: relative;
 
               &::before {
@@ -2090,11 +2093,196 @@ header {
           }
         }
       }
+
+      .last {
+        margin-bottom: $giga-space*2;
+      }
     }
 
     .active {
       display: inherit;
     }
+  }
+}
+
+@mixin background-account {
+  border-radius: 20px;
+  border: 1.5px solid rgba(91, 192, 190, 0.30);
+  background: linear-gradient(99deg, rgba(91, 192, 190, 0.15) 0%, rgba(91, 192, 190, 0.05) 100%);
+  background-blend-mode: hard-light;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(15px);
+}
+
+.account {
+
+  &__infos {
+    @include background-account;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $space;
+    margin-bottom: $space;
+
+    &--pers {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: $space;
+
+      .av {
+        width: 40px;
+        height: 40px;
+        background-image: url(/public/images/avatar.svg);
+        background-position: center;
+        background-size: cover;
+      }
+
+      .pers {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+
+        &__name {
+          font-weight: $semi-bold;
+          font-size: $small-title;
+        }
+
+        &__mail {
+          font-weight: $semi-bold;
+          color: rgba(225, 229, 242, 0.75);
+        }
+      }
+    }
+  }
+
+  &__data {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: $small-space;
+    margin-bottom: $space;
+
+    &--el {
+      @include background-account;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: $space;
+
+      .num {
+        font-weight: $semi-bold;
+        font-size: $small-title;
+      }
+
+      .desc {
+        font-weight: $semi-bold;
+        font-size: $small-text;
+        color: rgba(91, 192, 190, 0.50);
+      }
+    }
+  }
+
+  .marg {
+    margin-bottom: $space
+  }
+
+  &__bas {
+    @include background-account;
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: $small-space;
+    padding: $small-space $space;
+
+    &--log {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: $tiny-space;
+
+      .logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 32px;
+        height: 32px;
+      }
+
+      .log {
+        font-weight: $semi-bold;
+      }
+    }
+
+    .toggle {
+      @include toggle;
+    }
+
+    &--lang {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: $small-space;
+
+      .lang {
+        font-size: $small-text;
+        font-weight: $semi-bold;
+        color: rgba(225, 229, 242, 0.75);
+      }
+    }
+  }
+
+  &__title {
+    margin: 40px 0 $space 0;
+    text-transform: uppercase;
+    color: rgba(91, 192, 190, 0.5);
+    font-size: $text;
+  }
+
+  &__van {
+    @include background-account;
+    border: 2px solid $secondary-color;
+    padding: $big-space $space;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &--infos {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+
+      .van {
+        font-weight: $bold;
+        font-size: $text;
+      }
+
+      .desc {
+        font-size: $small-text;
+        font-weight: $semi-bold;
+        color: rgba(225, 229, 242, 0.75);
+
+        .green {
+          color: $green;
+        }
+      }
+    }
+  }
+
+  &__signout {
+    @include buttons; 
+    margin-top: $giga-space;
+  }
+
+  &__suppr {
+    @include buttons; 
+    margin: $space 0 64px 0;
+    background-color: $red;
   }
 }
 

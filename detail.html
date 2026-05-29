@@ -8,12 +8,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VanLive — Home</title>
+    <title>VanLive — Détails</title>
     <meta name="description" content="VanLive">
     <!-- Open Graph data -->
-    <meta property="og:site_name" content="VanLive — Home">
-    <meta property="og:title" content="VanLive — Home">
-    <meta property="og:description" content="VanLive Home">
+    <meta property="og:site_name" content="VanLive — Détails">
+    <meta property="og:title" content="VanLive — Détails">
+    <meta property="og:description" content="VanLive Détails">
     <meta property="og:type" content="website">
     <meta property="og:url" content="http://aurelienfeye.be/vanlive">
     <meta property="og:image" content="">
@@ -39,7 +39,7 @@
     <header>
         <nav class="menu">
             <ul class="menu__links">
-                <li class="menu__links--el menu__links--active">
+                <li class="menu__links--el">
                     <a href="index.html">
                         <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -57,7 +57,7 @@
                         </svg>
                     </a>
                 </li>
-                <li class="menu__links--el">
+                <li class="menu__links--el menu__links--active">
                     <a href="detail.html">
                         <svg width="27" height="30" viewBox="0 0 27 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path
@@ -81,6 +81,10 @@
 
     <main class="main__detail main__princ">
 
+        <div class="loadfast">
+            <h2 class="loader__title">VanLive</h2>
+          </div>
+
         <h1 class="detail__title">Données du véhicule</h1>
 
         <section class="detail">
@@ -93,7 +97,7 @@
             </ul>
 
             <div class="detail__content">
-                <div class="detail__content--el" id="bat">
+                <div class="detail__content--el active" id="bat">
                     <div class="energy">
                         <h2 class="energy__title">énergie</h2>
                         <div class="energy__el">
@@ -133,7 +137,7 @@
                         </div>
                     </div>
 
-                    <div class="prod">
+                    <div class="prod last">
                         <h2 class="prod__title">production dernières 24h</h2>
                         <div class="prod__el">
                             <div class="prod__el--chart">
@@ -147,8 +151,6 @@
                         </div>
                     </div>
                 </div>
-
-
                 <div class="detail__content--el" id="eau">
                     <div class="wat">
                         <h2 class="wat__title">Eau</h2>
@@ -198,7 +200,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="wat">
+                    <div class="wat last">
                         <h2 class="wat__title">Consommation des 7 derniers jours</h2>
 
                         <div class="wat__el">
@@ -266,7 +268,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="energy">
+                    <div class="energy last">
                         <h2 class="energy__title">ventilation</h2>
                         <div class="energy__el">
                             <div class="energy__el--eq">
@@ -320,7 +322,7 @@
                     </div>
                 </div>
                 <div class="detail__content--el" id="equipement">
-                    <div class="energy">
+                    <div class="energy last">
                         <h2 class="energy__title">équipements</h2>
                         <div class="energy__el">
                             <div class="energy__el--eq">
@@ -462,7 +464,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="detail__content--el active" id="vehicule">
+                <div class="detail__content--el" id="vehicule">
                     <div class="veh">
                         <h2 class="veh__title">véhicule</h2>
 
@@ -511,7 +513,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="pneu">
+                    <div class="pneu last">
                         <h2 class="pneu__title">pression des pneus</h2>
 
                         <div class="pneu__press">
