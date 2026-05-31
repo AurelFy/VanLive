@@ -4,7 +4,7 @@ import '../styles/style.scss';
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { initializeApp } from "firebase/app";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged, deleteUser, signOut } from "firebase/auth";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDrYwhHOXQsnseeUWuN6NGvcC7jTb_J2Bc",
@@ -34,7 +34,7 @@ if (isOnboardingPage) {
 } else if (isConnexionPage || isIndexPage) {
   const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
 
-  if (!hasSeenOnboarding && !isConnexionPage) {
+  if (!hasSeenOnboarding) {
     window.location.href = 'onboarding.html';
   }
 }
@@ -47,11 +47,11 @@ if (isIndexPage) {
     }
 
     await user.reload();
-    const freshUser = auth.currentUser;
+    const infoUser = auth.currentUser;
 
-    const nameEl = document.querySelector(".home__title--name"); 
+    const nameEl = document.querySelector(".home__title--name");
     if (nameEl) {
-      nameEl.textContent = freshUser.displayName || "Utilisateur";
+      nameEl.textContent = infoUser.displayName || "Utilisateur";
     }
   });
 }
@@ -67,19 +67,53 @@ if (isAccountPage) {
 
     await user.reload();
 
-    const freshUser = auth.currentUser;
+    const infoUser = auth.currentUser;
 
     const nameEl = document.querySelector(".pers__name");
     const mailEl = document.querySelector(".pers__mail");
 
     if (nameEl) {
-      nameEl.textContent = freshUser.displayName || "Utilisateur";
+      nameEl.textContent = infoUser.displayName || "Utilisateur";
     }
 
     if (mailEl) {
-      mailEl.textContent = freshUser.email || "Aucun email";
+      mailEl.textContent = infoUser.email || "**";
     }
   });
+
+  const signOutBtn = document.querySelector(".account__signout");
+  const deleteBtn = document.querySelector(".account__suppr");
+
+  if (signOutBtn) {
+    signOutBtn.addEventListener("click", async () => {
+      await signOut(auth);
+      localStorage.removeItem('hasSeenOnboarding'); // optionnel
+      window.location.href = "connexion.html";
+    });
+  }
+
+  if (deleteBtn) {
+    deleteBtn.addEventListener("click", async () => {
+      const confirmed = confirm("Supprimer définitivement votre compte ?");
+      if (!confirmed) return;
+
+      const user = auth.currentUser;
+      if (!user) return;
+
+      try {
+        await deleteUser(user);
+        window.location.href = "connexion.html";
+      } catch (error) {
+        if (error.code === "auth/requires-recent-login") {
+          alert("Pour des raisons de sécurité, reconnectez-vous avant de supprimer votre compte.");
+          await signOut(auth);
+          window.location.href = "connexion.html";
+        } else {
+          alert("Erreur : " + error.message);
+        }
+      }
+    });
+  }
 }
 
 const onboardScreen = document.querySelectorAll(".onboard__screen");
@@ -220,3 +254,4 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 });
+

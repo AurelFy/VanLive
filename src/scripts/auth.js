@@ -8,7 +8,8 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
   signOut,
-  updateProfile
+  updateProfile, 
+  deleteUser
 } from "firebase/auth";
 
 const firebaseConfig = {
@@ -61,17 +62,17 @@ registerBtn.addEventListener("click", async () => {
   try {
     justRegistered = true;
 
-    const userCredential = await createUserWithEmailAndPassword(
+    const userLog = await createUserWithEmailAndPassword(
       auth,
       registerEmail.value,
       registerPassword.value
     );
 
-    await updateProfile(userCredential.user, {
+    await updateProfile(userLog.user, {
       displayName: registerFirstname.value.trim()
     });
 
-    await userCredential.user.reload();
+    await userLog.user.reload();
 
     await signOut(auth);
 
