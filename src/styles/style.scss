@@ -46,7 +46,6 @@ $small-radius: 10px;
 body {
   font-family: $text-font;
   color: $text-color;
-  //overflow-x: hidden;
   background-color: $bg-body;
   position: relative;
   max-width: 480px;
@@ -233,6 +232,19 @@ button {
   position: relative;
   overflow: hidden;
   height: 100vh;
+}
+
+.onboard__skip {
+  position: absolute;
+  top: 32px;
+  right: 16px;
+  font-size: $small-text;
+  padding: 4px 16px;
+  border-radius: $small-radius;
+  color: $text-color;
+  border: 1px solid $text-color;
+  background-color: transparent;
+  z-index: 500;
 }
 
 .onboard__screen {
@@ -786,14 +798,12 @@ header {
 // Planification 
 
 .body__plan {
-  //overflow-x: hidden;
   position: relative;
 }
 
 .main__plan {
   position: relative;
   overflow-x: hidden;
-  // height: 100vh;
   min-height: 100vh;
 }
 
@@ -955,7 +965,6 @@ header {
 
 .fplan {
   height: 100vh;
-  //display: none;
 
   &__title {
     display: flex;
@@ -2105,6 +2114,8 @@ header {
   }
 }
 
+// Compte
+
 @mixin background-account {
   border-radius: 20px;
   border: 1.5px solid rgba(91, 192, 190, 0.30);
@@ -2286,4 +2297,58 @@ header {
   }
 }
 
-// Compte
+.notif__container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: $space;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 9998;
+  width: 100%;
+
+  &--el {
+    font-size: $text;
+    background-color: #0B132B;
+    font-weight: $semi-bold;
+    padding: $small-space $space;
+    border-radius: $small-radius;
+    border: 1px solid $secondary-color;
+
+    &.warning {
+      position: relative;
+      border: 1px solid $red;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: url(/images/des.svg) no-repeat center / contain;
+        z-index: 9999;
+        right: $space;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    &.success {
+      position: relative;
+      border: 1px solid $green;
+
+      &::after {
+        content: '';
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        background: url(/images/act.svg) no-repeat center / contain;
+        z-index: 9999;
+        right: $space;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+  }
+}
+

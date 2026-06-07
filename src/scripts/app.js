@@ -24,6 +24,7 @@ const isIndexPage = document.querySelector('.main__index') !== null;
 
 if (isOnboardingPage) {
   const lastBtn = document.querySelector('.fourth__btn');
+  const skipBtn = document.querySelector('.onboard__skip');
 
   if (lastBtn) {
     lastBtn.addEventListener('click', () => {
@@ -31,12 +32,27 @@ if (isOnboardingPage) {
       window.location.href = 'connexion.html';
     });
   }
-} else if (isConnexionPage || isIndexPage) {
-  const hasSeenOnboarding = localStorage.getItem('hasSeenOnboarding');
 
-  if (!hasSeenOnboarding) {
-    window.location.href = 'onboarding.html';
+  if (skipBtn) {
+    skipBtn.addEventListener('click', () => {
+      localStorage.setItem('hasSeenOnboarding', 'true');
+      window.location.href = 'connexion.html';
+    });
   }
+
+} else if (isConnexionPage) {
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location.href = "index.html"; 
+    }
+  });
+
+} else {
+  onAuthStateChanged(auth, (user) => {
+    if (!user) {
+      window.location.href = "onboarding.html";
+    }
+  });
 }
 
 if (isIndexPage) {
@@ -87,7 +103,7 @@ if (isAccountPage) {
   if (signOutBtn) {
     signOutBtn.addEventListener("click", async () => {
       await signOut(auth);
-      localStorage.removeItem('hasSeenOnboarding'); // optionnel
+      localStorage.removeItem('hasSeenOnboarding'); 
       window.location.href = "connexion.html";
     });
   }
@@ -255,3 +271,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+
+let counter = 0;
+
+document.querySelectorAll('.notif[data-type]').forEach(label => {
+  let active = false;
+
+  label.addEventListener('click', () => {
+    active = !active;
+    addToast(active ? 'success' : 'warning', `${label.dataset.msg} ${active ? 'activé' : 'désactivé'}`);
+  });
+});
+
+function addToast(type, msg) {
+  const container = document.querySelector('.notif__container');
+  const id = 'toast-' + (++counter);
+
+  const el = document.createElement('div');
+  el.className = `notif__container--el ${type}`;
+  el.id = id;
+  el.textContent = msg;
+
+  container.appendChild(el);
+  el.addEventListener('click', () => removeToast(id));
+  setTimeout(() => removeToast(id), 1000);
+}
+
+function removeToast(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.style.animation = 'fadeOut 0.3s ease-in-out';
+  setTimeout(() => el.remove(), 200);
+}
