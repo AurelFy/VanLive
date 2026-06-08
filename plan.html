@@ -112,17 +112,18 @@
       <h3 class="splan__sub">Commencez par les infos essentielles</h3>
       <div class="splan__name">
         <span class="splan__name--label">nom du voyage</span>
-        <div class="splan__name--input">
-          <span class="trav__name">Road Trip Bruxelles / Copenhague</span>
-        </div>
+          <input class="splan__name--input" id="input__name" type="text" placeholder="Ex: Road Trip Bruxelles / Copenhague">
       </div>
       <div class="splan__date">
         <span class="splan__date--label">dates</span>
         <div class="splan__date--input">
           <div class="date">
-            <span class="date__text">Départ</span>
-            <span class="date__num">11 juillet</span>
-            <span class="date__text">Samedi</span>
+            <span class="date__text ">Choisir la date</span>
+            <div class="date__picker-wrap">
+              <span class="date__num" id="label-depart">Départ</span>
+              <input class="date__input--hidden" id="input__depart" type="date" value="2026-07-11">
+            </div>
+            <span class="date__text date__choice--dep"></span>
           </div>
           <svg xmlns="http://www.w3.org/2000/svg" width="26" height="21" viewBox="0 0 26 21" fill="none">
             <path d="M1.5 10.4445H23.8611" stroke="#47989C" stroke-width="3" stroke-linecap="round"
@@ -131,17 +132,18 @@
               stroke-linecap="round" stroke-linejoin="round" />
           </svg>
           <div class="date">
-            <span class="date__text">Départ</span>
-            <span class="date__num">11 juillet</span>
-            <span class="date__text">Samedi</span>
+            <span class="date__text">Choisir la date</span>
+            <div class="date__picker-wrap">
+              <span class="date__num" id="label-depart">Arrivée</span>
+              <input class="date__input--hidden" id="input__arrivee" type="date" value="2026-07-11">
+            </div>
+            <span class="date__text date__choice--arr"></span>
           </div>
         </div>
       </div>
       <div class="splan__desc">
         <span class="splan__desc--label">description</span>
-        <div class="splan__desc--input">
-          <span class="trav__desc">Vacances d'été 2026</span>
-        </div>
+          <input class="splan__name--input" id="input__desc" type="text" placeholder="Ex: Vacances d'été 2026">
       </div>
       <button class="splan__btn plan__screen--btn">Suivant ➡︎</button>
     </section>
@@ -231,7 +233,7 @@
           </div>
           <div class="opt__toggle">
             <input class="opt__toggle--input" type="checkbox" id="switch5" />
-            <label class="opt__toggle--label" for="switch5">Toggle</label>
+            <label class="opt__toggle--label notif" data-type="alerts" data-msg="Alertes ressources" for="switch5">Toggle</label>
           </div>
         </div>
         <div class="foplan__opt--sep"></div>
@@ -242,7 +244,7 @@
           </div>
           <div class="opt__toggle">
             <input class="opt__toggle--input" type="checkbox" id="switch6" />
-            <label class="opt__toggle--label" for="switch6">Toggle</label>
+            <label class="opt__toggle--label notif" data-type="meteo" data-msg="Météo" for="switch6">Toggle</label>
           </div>
         </div>
         <div class="foplan__opt--sep"></div>
@@ -253,7 +255,7 @@
           </div>
           <div class="opt__toggle">
             <input class="opt__toggle--input" type="checkbox" id="switch7" />
-            <label class="opt__toggle--label" for="switch7">Toggle</label>
+            <label class="opt__toggle--label notif" data-type="services" data-msg="Points de services" for="switch7">Toggle</label>
           </div>
         </div>
         <div class="foplan__opt--sep"></div>
@@ -264,7 +266,7 @@
           </div>
           <div class="opt__toggle">
             <input class="opt__toggle--input" type="checkbox" id="switch8" />
-            <label class="opt__toggle--label" for="switch8">Toggle</label>
+            <label class="opt__toggle--label notif" data-type="pos" data-msg="Partage de position" for="switch8">Toggle</label>
           </div>
         </div>
         <div class="foplan__opt--sep"></div>
@@ -275,7 +277,7 @@
           </div>
           <div class="opt__toggle">
             <input class="opt__toggle--input" type="checkbox" id="switch9" />
-            <label class="opt__toggle--label" for="switch9">Toggle</label>
+            <label class="opt__toggle--label notif" data-type="estim" data-msg="Estimation budget" for="switch9">Toggle</label>
           </div>
         </div>
         <div class="foplan__opt--sep"></div>
@@ -363,8 +365,8 @@
         <img class="" src="./public/images/plan_detail.png" alt="trajet">
       </div>
       <div class="siplan__res">
-        <p class="siplan__res--title">Road Trip Bruxelles / Copenhague <span>— Vacances d'été 2026</span></p>
-        <span class="siplan__res--date">11 juillet — 23 juillet · 12 jours</span>
+        <p class="siplan__res--title"><span class="siplan__name"></span> <span class="siplan__desc"></span></p>
+        <span class="siplan__res--date trav__date"></span>
         <div class="siplan__res--cards">
           <div class="card">
             <span class="card__num">1101</span>
@@ -405,8 +407,8 @@
 
       <div class="seplan__it">
         <div class="seplan__it--title">
-          <span class="big">Road Trip Bruxelles / Copenhague</span>
-          <span class="sub">11 juillet / 23 juillet · 12 jours</span>
+          <span class="big seplan__name"></span>
+          <span class="sub seplan__dates trav__date"></span>
         </div>
         <div class="seplan__it--stage">
           <div class="progress">
@@ -523,7 +525,7 @@
       </div>
     </section>
     
-
+    <div class="notif__container"></div>
   </main>
 
   <script type="module" src="./src/scripts/app.js"></script>

@@ -43,7 +43,7 @@ if (isOnboardingPage) {
 } else if (isConnexionPage) {
   onAuthStateChanged(auth, (user) => {
     if (user) {
-      window.location.href = "index.html"; 
+      window.location.href = "index.html";
     }
   });
 
@@ -103,7 +103,7 @@ if (isAccountPage) {
   if (signOutBtn) {
     signOutBtn.addEventListener("click", async () => {
       await signOut(auth);
-      localStorage.removeItem('hasSeenOnboarding'); 
+      localStorage.removeItem('hasSeenOnboarding');
       window.location.href = "connexion.html";
     });
   }
@@ -167,6 +167,72 @@ function updatePlanScreens(nextIndex) {
 
 updateOnboardScreens(currentOnboardScreen);
 updatePlanScreens(currentPlanScreen);
+
+
+const inputDepart = document.querySelector('#input__depart');
+const inputArrivee = document.querySelector('#input__arrivee');
+
+const choiceDepart = document.querySelector('.date__choice--dep');
+const choiceArrivee = document.querySelector('.date__choice--arr');
+
+const formatDate = (str) => {
+  if (!str) return '';
+
+  const [y, m, d] = str.split('-').map(Number);
+
+  return new Date(y, m - 1, d).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
+
+inputDepart?.addEventListener('change', () => {
+  choiceDepart.textContent = formatDate(inputDepart.value);
+});
+
+inputArrivee?.addEventListener('change', () => {
+  choiceArrivee.textContent = formatDate(inputArrivee.value);
+});
+
+
+const splanBtn = document.querySelector('.splan__btn');
+
+if (splanBtn) {
+  splanBtn.addEventListener('click', () => {
+    const nom = document.querySelector('#input__name')?.value?.trim();
+    const desc = document.querySelector('#input__desc')?.value?.trim();
+    const depart = document.querySelector('#input__depart')?.value;
+    const arrivee = document.querySelector('#input__arrivee')?.value;
+
+    document.querySelectorAll('.seplan__name, .siplan__name').forEach(el => {
+      el.textContent = nom || '';
+    });
+
+    if (depart && arrivee) {
+      const fmt = (str) => {
+        const [y, m, d] = str.split('-').map(Number);
+        return new Date(y, m - 1, d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
+      };
+      const nbJours = (() => {
+        const [y1, m1, d1] = depart.split('-').map(Number);
+        const [y2, m2, d2] = arrivee.split('-').map(Number);
+        return Math.round((new Date(y2, m2 - 1, d2) - new Date(y1, m1 - 1, d1)) / 86400000) + 1;  // divisé en nombre de milisecondes dans un jour car js retourne la différence des 2 dates en milisecondes. donc on transfrome en jour
+      })();
+      const dateStr = `${fmt(depart)} — ${fmt(arrivee)} · ${nbJours} jours`;
+
+      document.querySelectorAll('.trav__date').forEach(el => {
+        el.textContent = dateStr;
+      });
+    }
+
+    const siplanDesc = document.querySelector('.siplan__desc');
+    if (siplanDesc) siplanDesc.textContent = desc ? ` — ${desc}` : '';
+  });
+}
+
+
+
 
 onboardBtn.forEach((button) => {
   button.addEventListener("click", () => {
@@ -304,3 +370,14 @@ function removeToast(id) {
   el.style.animation = 'fadeOut 0.3s ease-in-out';
   setTimeout(() => el.remove(), 200);
 }
+
+
+const travTypes = document.querySelectorAll('.tplan__cards--el');
+
+
+travTypes.forEach((travType) => {
+  travType.addEventListener('click', () => {
+    travTypes.forEach(el => el.classList.remove('active'));
+    travType.classList.add('active');
+  });
+});
