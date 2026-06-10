@@ -132,6 +132,8 @@ if (isAccountPage) {
   }
 }
 
+
+
 const onboardScreen = document.querySelectorAll(".onboard__screen");
 const onboardBtn = document.querySelectorAll(".onboard__screen--btn");
 
@@ -169,70 +171,8 @@ updateOnboardScreens(currentOnboardScreen);
 updatePlanScreens(currentPlanScreen);
 
 
-const inputDepart = document.querySelector('#input__depart');
-const inputArrivee = document.querySelector('#input__arrivee');
 
-const choiceDepart = document.querySelector('.date__choice--dep');
-const choiceArrivee = document.querySelector('.date__choice--arr');
-
-const formatDate = (str) => {
-  if (!str) return '';
-
-  const [y, m, d] = str.split('-').map(Number);
-
-  return new Date(y, m - 1, d).toLocaleDateString('fr-FR', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric'
-  });
-};
-
-inputDepart?.addEventListener('change', () => {
-  choiceDepart.textContent = formatDate(inputDepart.value);
-});
-
-inputArrivee?.addEventListener('change', () => {
-  choiceArrivee.textContent = formatDate(inputArrivee.value);
-});
-
-
-const splanBtn = document.querySelector('.splan__btn');
-
-if (splanBtn) {
-  splanBtn.addEventListener('click', () => {
-    const nom = document.querySelector('#input__name')?.value?.trim();
-    const desc = document.querySelector('#input__desc')?.value?.trim();
-    const depart = document.querySelector('#input__depart')?.value;
-    const arrivee = document.querySelector('#input__arrivee')?.value;
-
-    document.querySelectorAll('.seplan__name, .siplan__name').forEach(el => {
-      el.textContent = nom || '';
-    });
-
-    if (depart && arrivee) {
-      const fmt = (str) => {
-        const [y, m, d] = str.split('-').map(Number);
-        return new Date(y, m - 1, d).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long' });
-      };
-      const nbJours = (() => {
-        const [y1, m1, d1] = depart.split('-').map(Number);
-        const [y2, m2, d2] = arrivee.split('-').map(Number);
-        return Math.round((new Date(y2, m2 - 1, d2) - new Date(y1, m1 - 1, d1)) / 86400000) + 1;  // divisé en nombre de milisecondes dans un jour car js retourne la différence des 2 dates en milisecondes. donc on transfrome en jour
-      })();
-      const dateStr = `${fmt(depart)} — ${fmt(arrivee)} · ${nbJours} jours`;
-
-      document.querySelectorAll('.trav__date').forEach(el => {
-        el.textContent = dateStr;
-      });
-    }
-
-    const siplanDesc = document.querySelector('.siplan__desc');
-    if (siplanDesc) siplanDesc.textContent = desc ? ` — ${desc}` : '';
-  });
-}
-
-
-
+// btn écran suivant onboarding et planification
 
 onboardBtn.forEach((button) => {
   button.addEventListener("click", () => {
@@ -256,6 +196,8 @@ planBtn.forEach((button) => {
   });
 });
 
+// btn retour en arrière page planification
+
 const backBtn = document.querySelectorAll(".back__btn");
 
 backBtn.forEach((button) => {
@@ -277,6 +219,166 @@ if (hasReachedSeplan && seplanIndex !== -1) {
 updatePlanScreens(currentPlanScreen);
 
 
+// récupération infos voyage
+
+const inputName = document.querySelector('#input__name');
+const inputDesc = document.querySelector('#input__desc');
+const inputDepart = document.querySelector('#input__depart');
+const inputArrivee = document.querySelector('#input__arrivee');
+
+const choiceDepart = document.querySelector('.date__choice--dep');
+const choiceArrivee = document.querySelector('.date__choice--arr');
+
+const splanBtn = document.querySelector('.splan__btn');
+
+// format des dates
+
+const formatDate = (str) => {
+  if (!str) return '';
+
+  const [y, m, d] = str.split('-').map(Number);
+  // m - 1 car en JS : janvier vaut 0 
+  return new Date(y, m - 1, d).toLocaleDateString('fr-FR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
+
+// affichage sur les écrans
+
+function updateTripDisplay() {
+  const nom = localStorage.getItem('tripName') || '';
+  const desc = localStorage.getItem('tripDesc') || '';
+  const depart = localStorage.getItem('tripDepart');
+  const arrivee = localStorage.getItem('tripArrivee');
+
+  document.querySelectorAll('.seplan__name, .siplan__name').forEach(el => {
+    el.textContent = nom;
+  });
+
+  if (depart && arrivee) {
+    const fmt = (str) => {
+      const [y, m, d] = str.split('-').map(Number);
+
+      return new Date(y, m - 1, d).toLocaleDateString('fr-FR', {
+        day: 'numeric',
+        month: 'long'
+      });
+    };
+
+    const nbJours = (() => {
+      const [y1, m1, d1] = depart.split('-').map(Number);
+      const [y2, m2, d2] = arrivee.split('-').map(Number);
+
+      return (
+        Math.round(
+          (new Date(y2, m2 - 1, d2) -
+            new Date(y1, m1 - 1, d1)) /
+          86400000
+        ) + 1
+      );
+    })();
+
+    const dateStr = `${fmt(depart)} — ${fmt(arrivee)} · ${nbJours} jours`;
+
+    document.querySelectorAll('.trav__date').forEach(el => {
+      el.textContent = dateStr;
+    });
+  }
+
+  const siplanDesc = document.querySelector('.siplan__desc');
+
+  if (siplanDesc) {
+    siplanDesc.textContent = desc ? ` — ${desc}` : '';
+  }
+
+  if (depart) {
+    document.querySelectorAll('.infos__depart').forEach(el => {
+      el.textContent = formatDate(depart);
+    });
+  }
+}
+
+// données enregistrées et présentes meme si on quitte la page
+
+window.addEventListener('DOMContentLoaded', () => {
+  const savedName = localStorage.getItem('tripName');
+  const savedDesc = localStorage.getItem('tripDesc');
+  const savedDepart = localStorage.getItem('tripDepart');
+  const savedArrivee = localStorage.getItem('tripArrivee');
+
+  if (savedName && inputName) {
+    inputName.value = savedName;
+  }
+
+  if (savedDesc && inputDesc) {
+    inputDesc.value = savedDesc;
+  }
+
+  if (savedDepart && inputDepart) {
+    inputDepart.value = savedDepart;
+
+    if (choiceDepart) {
+      choiceDepart.textContent = formatDate(savedDepart);
+    }
+  }
+
+  if (savedArrivee && inputArrivee) {
+    inputArrivee.value = savedArrivee;
+
+    if (choiceArrivee) {
+      choiceArrivee.textContent = formatDate(savedArrivee);
+    }
+  }
+
+  updateTripDisplay();
+});
+
+inputName?.addEventListener('input', () => {
+  localStorage.setItem('tripName', inputName.value);
+});
+
+inputDesc?.addEventListener('input', () => {
+  localStorage.setItem('tripDesc', inputDesc.value);
+});
+
+inputDepart?.addEventListener('change', () => {
+  localStorage.setItem('tripDepart', inputDepart.value);
+
+  if (choiceDepart) {
+    choiceDepart.textContent = formatDate(inputDepart.value);
+  }
+
+  updateTripDisplay();
+});
+
+inputArrivee?.addEventListener('change', () => {
+  localStorage.setItem('tripArrivee', inputArrivee.value);
+
+  if (choiceArrivee) {
+    choiceArrivee.textContent = formatDate(inputArrivee.value);
+  }
+
+  updateTripDisplay();
+});
+
+// btn validation des inputs
+
+if (splanBtn) {
+  splanBtn.addEventListener('click', () => {
+    localStorage.setItem('tripName', inputName?.value.trim() || '');
+    localStorage.setItem('tripDesc', inputDesc?.value.trim() || '');
+    localStorage.setItem('tripDepart', inputDepart?.value || '');
+    localStorage.setItem('tripArrivee', inputArrivee?.value || '');
+
+    updateTripDisplay();
+  });
+}
+
+
+
+// loader anim
 
 const loader = document.querySelector(".loader");
 const loaderText = document.querySelector(".loader__title");
@@ -318,6 +420,8 @@ if (loadFast) {
   });
 }
 
+// État actif nav page detail
+
 document.addEventListener("DOMContentLoaded", () => {
 
   const navItems = document.querySelectorAll(".detail__nav--el");
@@ -338,6 +442,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 
+// Notifs toggle activé/désactivé
 
 let counter = 0;
 
@@ -372,8 +477,9 @@ function removeToast(id) {
 }
 
 
-const travTypes = document.querySelectorAll('.tplan__cards--el');
+// Choix type de voyage
 
+const travTypes = document.querySelectorAll('.tplan__cards--el');
 
 travTypes.forEach((travType) => {
   travType.addEventListener('click', () => {
@@ -381,3 +487,220 @@ travTypes.forEach((travType) => {
     travType.classList.add('active');
   });
 });
+
+
+
+// Ajouter une étape modal
+
+
+(async function () {
+
+
+  const CITIES = [
+    { name: "Malmö", country: "Suède", flag: "🇸🇪" },
+    { name: "Helsingør", country: "Danemark", flag: "🇩🇰" },
+    { name: "Roskilde", country: "Danemark", flag: "🇩🇰" },
+    { name: "Lund", country: "Suède", flag: "🇸🇪" },
+    { name: "Frederiksberg", country: "Danemark", flag: "🇩🇰" },
+    { name: "Køge", country: "Danemark", flag: "🇩🇰" },
+    { name: "Hillerød", country: "Danemark", flag: "🇩🇰" },
+    { name: "Helsingborg", country: "Suède", flag: "🇸🇪" },
+    { name: "Göteborg", country: "Suède", flag: "🇸🇪" },
+    { name: "Stockholm", country: "Suède", flag: "🇸🇪" },
+    { name: "Aarhus", country: "Danemark", flag: "🇩🇰" },
+    { name: "Aalborg", country: "Danemark", flag: "🇩🇰" },
+    { name: "Odense", country: "Danemark", flag: "🇩🇰" },
+    { name: "Hambourg", country: "Allemagne", flag: "🇩🇪" },
+    { name: "Berlin", country: "Allemagne", flag: "🇩🇪" },
+    { name: "Kiel", country: "Allemagne", flag: "🇩🇪" },
+    { name: "Lübeck", country: "Allemagne", flag: "🇩🇪" },
+    { name: "Flensburg", country: "Allemagne", flag: "🇩🇪" },
+    { name: "Amsterdam", country: "Pays-Bas", flag: "🇳🇱" },
+    { name: "Bruxelles", country: "Belgique", flag: "🇧🇪" },
+    { name: "Paris", country: "France", flag: "🇫🇷" },
+    { name: "Oslo", country: "Norvège", flag: "🇳🇴" },
+    { name: "Bergen", country: "Norvège", flag: "🇳🇴" },
+  ];
+
+  const overlay = document.getElementById('stageModalOverlay');
+  const searchInput = document.getElementById('stageCitySearch');
+  const pillWrap = document.getElementById('stageCityPill');
+  const suggestionsWrap = document.getElementById('stageSuggestions');
+  const dateFrom = document.getElementById('stageDateFrom');
+  const dateTo = document.getElementById('stageDateTo');
+  const noteInput = document.getElementById('stageNote');
+  const confirmBtn = document.getElementById('stageModalConfirm');
+  const cancelBtn = document.getElementById('stageModalCancel');
+  const addBtn = document.querySelector('.fiplan__addstage');
+  const stagesContainer = document.querySelector('.fiplan');
+
+  let selectedCity = null;
+
+  function normalize(str) {
+    return str.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+  }
+
+  function formatDateFR(str) {
+    if (!str) return '';
+    const [, m, d] = str.split('-');
+    const months = ['jan', 'fév', 'mar', 'avr', 'mai', 'juin', 'juil', 'août', 'sep', 'oct', 'nov', 'déc'];
+    return `${parseInt(d)} ${months[parseInt(m) - 1]}`;
+  }
+
+  function updateConfirmBtn() {
+    confirmBtn.disabled = !(selectedCity && dateFrom.value && dateTo.value);
+  }
+
+
+  function renderSuggestions(query) {
+    suggestionsWrap.innerHTML = '';
+    if (!query || selectedCity) return;
+
+    const results = CITIES.filter(c =>
+      normalize(c.name).includes(normalize(query)) ||
+      normalize(c.country).includes(normalize(query))
+    ).slice(0, 5);
+
+    if (results.length === 0) {
+      suggestionsWrap.innerHTML = `<div class="fiplan__modal-sugg--empty">Aucune ville trouvée</div>`;
+      return;
+    }
+
+    const list = document.createElement('div');
+    list.className = 'fiplan__modal-sugg';
+
+    results.forEach(city => {
+      const item = document.createElement('div');
+      item.className = 'fiplan__modal-sugg--el';
+      item.innerHTML = `
+        <div>
+          <div class="fiplan__modal-sugg--name">${city.name}</div>
+          <div class="fiplan__modal-sugg--country">${city.country}</div>
+        </div>
+        <span class="fiplan__modal-sugg--flag">${city.flag}</span>
+      `;
+      item.addEventListener('mousedown', e => { e.preventDefault(); selectCity(city); });
+      list.appendChild(item);
+    });
+
+    suggestionsWrap.appendChild(list);
+  }
+
+  function selectCity(city) {
+    selectedCity = city;
+    searchInput.value = '';
+    searchInput.style.display = 'none';
+    suggestionsWrap.innerHTML = '';
+
+    pillWrap.innerHTML = '';
+    const pill = document.createElement('div');
+    pill.className = 'fiplan__modal-city';
+    pill.innerHTML = `<span>${city.flag} ${city.name}, ${city.country}</span><button>✕</button>`;
+    pill.querySelector('button').addEventListener('click', () => {
+      selectedCity = null;
+      pillWrap.innerHTML = '';
+      searchInput.style.display = '';
+      searchInput.focus();
+      updateConfirmBtn();
+    });
+    pillWrap.appendChild(pill);
+    updateConfirmBtn();
+  }
+
+  searchInput.addEventListener('input', () => renderSuggestions(searchInput.value.trim()));
+  searchInput.addEventListener('blur', () => setTimeout(() => { suggestionsWrap.innerHTML = ''; }, 150));
+
+
+  [dateFrom, dateTo].forEach(i => i.addEventListener('change', updateConfirmBtn));
+
+
+  function preventScroll(e) {
+    e.preventDefault();
+  }
+
+  function openModal() {
+    document.body.style.overflow = 'hidden';
+    document.addEventListener('touchmove', preventScroll, { passive: false });
+    selectedCity = null;
+    pillWrap.innerHTML = '';
+    searchInput.style.display = '';
+    searchInput.value = '';
+    suggestionsWrap.innerHTML = '';
+    dateFrom.value = '';
+    dateTo.value = '';
+    noteInput.value = '';
+    updateConfirmBtn();
+    overlay.classList.add('fiplan__modal--open');
+    setTimeout(() => searchInput.focus(), 300);
+  }
+
+  function closeModal() {
+    document.body.style.overflow = '';
+    document.removeEventListener('touchmove', preventScroll);
+    overlay.classList.remove('fiplan__modal--open');
+  }
+
+  addBtn.addEventListener('click', openModal);
+  cancelBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+
+  confirmBtn.addEventListener('click', () => {
+    const note = noteInput.value.trim() || 'Visite de la ville';
+    const newNum = stagesContainer.querySelectorAll('.fiplan__stage').length + 1;
+    const dateStr = `${formatDateFR(dateFrom.value)}–${formatDateFR(dateTo.value)}`;
+
+    const stage = document.createElement('div');
+    stage.className = 'fiplan__stage fiplan__stage--new';
+    stage.innerHTML =
+      `<span class="fiplan__stage--num">${newNum}</span>
+    <div class="fiplan__stage--infos">
+      <span class="title">${selectedCity.flag} ${selectedCity.name}</span>
+      <span class="infos">${dateStr} · ${note}</span>
+    </div>
+    <button class="fiplan__stage--delete">✕</button>
+    `;
+
+    stage.querySelector('.fiplan__stage--delete').addEventListener('click', () => {
+      const syncId = stage.dataset.syncId;
+      stage.remove();
+    
+      if (syncId) {
+        document.querySelector(`.stages__indiv[data-sync-id="${syncId}"]`)?.remove();
+        document.querySelector(`.progress__dot[data-sync-id="${syncId}"]`)?.remove();
+      }
+    
+      stagesContainer.querySelectorAll('.fiplan__stage').forEach((s, i) => {
+        s.querySelector('.fiplan__stage--num').textContent = i + 1;
+      });
+    });
+
+    stagesContainer.insertBefore(stage, addBtn);
+
+    const seplanStages = document.querySelector('.seplan .stages');
+if (seplanStages) {
+  const seplanStage = document.createElement('div');
+  seplanStage.className = 'stages__indiv stages__indiv--new';
+  seplanStage.dataset.syncId = Date.now(); 
+  stage.dataset.syncId = seplanStage.dataset.syncId;
+
+  seplanStage.innerHTML = `
+    <span class="stages__indiv--title">${selectedCity.flag} ${selectedCity.name}</span>
+    <span class="stages__indiv--sub">${dateStr} · ${note}</span>
+  `;
+  seplanStages.appendChild(seplanStage);
+
+
+  const progressWrap = document.querySelector('.seplan .progress');
+  if (progressWrap) {
+    const dot = document.createElement('div');
+    dot.className = 'progress__dot';
+    dot.dataset.syncId = seplanStage.dataset.syncId;
+    progressWrap.appendChild(dot);
+  }
+}
+
+    closeModal();
+  });
+
+})();
